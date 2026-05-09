@@ -41,9 +41,11 @@ public/designs/*-dark.png
 !public/designs/*-preview-light.png
 !public/designs/*-preview-dark.png
 
-# mockups mirrored from Printify
-public/mockups/
+# Mockups: keep Printify-mirrored mockups in repo so the storefront
+# works out-of-the-box on git clone — the only ones we exclude are
+# any temp/probe scratch.
 
-# Printify sync intermediates — but commit the canonical mapping
-data/
+# Printify sync intermediates — keep canonical mapping committed,
+# exclude the rest.
+data/*
 !data/products.json

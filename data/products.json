@@ -1,0 +1,554 @@
+[
+  {
+    "slug": "aurelius-impediment-hoodie",
+    "printify_product_id": "69ff1f45de847272360ce742",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/aurelius-impediment/hoodie/light-0.jpg",
+        "/mockups/aurelius-impediment/hoodie/light-1.jpg",
+        "/mockups/aurelius-impediment/hoodie/light-2.jpg",
+        "/mockups/aurelius-impediment/hoodie/light-3.jpg",
+        "/mockups/aurelius-impediment/hoodie/light-4.jpg",
+        "/mockups/aurelius-impediment/hoodie/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/aurelius-impediment/hoodie/dark-0.jpg",
+        "/mockups/aurelius-impediment/hoodie/dark-1.jpg",
+        "/mockups/aurelius-impediment/hoodie/dark-2.jpg",
+        "/mockups/aurelius-impediment/hoodie/dark-3.jpg",
+        "/mockups/aurelius-impediment/hoodie/dark-4.jpg",
+        "/mockups/aurelius-impediment/hoodie/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "aurelius-impediment-tee",
+    "printify_product_id": "69ff1d9e4ba2ff981a020318",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/aurelius-impediment/tee/light-0.jpg",
+        "/mockups/aurelius-impediment/tee/light-1.jpg",
+        "/mockups/aurelius-impediment/tee/light-2.jpg",
+        "/mockups/aurelius-impediment/tee/light-3.jpg",
+        "/mockups/aurelius-impediment/tee/light-4.jpg",
+        "/mockups/aurelius-impediment/tee/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/aurelius-impediment/tee/dark-0.jpg",
+        "/mockups/aurelius-impediment/tee/dark-1.jpg",
+        "/mockups/aurelius-impediment/tee/dark-2.jpg",
+        "/mockups/aurelius-impediment/tee/dark-3.jpg",
+        "/mockups/aurelius-impediment/tee/dark-4.jpg",
+        "/mockups/aurelius-impediment/tee/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "da-vinci-simplicity-hoodie",
+    "printify_product_id": "69ff20b3f0f38ff1d5043762",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/da-vinci-simplicity/hoodie/light-0.jpg",
+        "/mockups/da-vinci-simplicity/hoodie/light-1.jpg",
+        "/mockups/da-vinci-simplicity/hoodie/light-2.jpg",
+        "/mockups/da-vinci-simplicity/hoodie/light-3.jpg",
+        "/mockups/da-vinci-simplicity/hoodie/light-4.jpg",
+        "/mockups/da-vinci-simplicity/hoodie/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/da-vinci-simplicity/hoodie/dark-0.jpg",
+        "/mockups/da-vinci-simplicity/hoodie/dark-1.jpg",
+        "/mockups/da-vinci-simplicity/hoodie/dark-2.jpg",
+        "/mockups/da-vinci-simplicity/hoodie/dark-3.jpg",
+        "/mockups/da-vinci-simplicity/hoodie/dark-4.jpg",
+        "/mockups/da-vinci-simplicity/hoodie/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "da-vinci-simplicity-tee",
+    "printify_product_id": "69ff1e45f0f38ff1d504363f",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/da-vinci-simplicity/tee/light-0.jpg",
+        "/mockups/da-vinci-simplicity/tee/light-1.jpg",
+        "/mockups/da-vinci-simplicity/tee/light-2.jpg",
+        "/mockups/da-vinci-simplicity/tee/light-3.jpg",
+        "/mockups/da-vinci-simplicity/tee/light-4.jpg",
+        "/mockups/da-vinci-simplicity/tee/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/da-vinci-simplicity/tee/dark-0.jpg",
+        "/mockups/da-vinci-simplicity/tee/dark-1.jpg",
+        "/mockups/da-vinci-simplicity/tee/dark-2.jpg",
+        "/mockups/da-vinci-simplicity/tee/dark-3.jpg",
+        "/mockups/da-vinci-simplicity/tee/dark-4.jpg",
+        "/mockups/da-vinci-simplicity/tee/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "ed-night-sky-hoodie",
+    "printify_product_id": "69ff21d9f0f38ff1d50437e3",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/ed-night-sky/hoodie/light-0.jpg",
+        "/mockups/ed-night-sky/hoodie/light-1.jpg",
+        "/mockups/ed-night-sky/hoodie/light-2.jpg",
+        "/mockups/ed-night-sky/hoodie/light-3.jpg",
+        "/mockups/ed-night-sky/hoodie/light-4.jpg",
+        "/mockups/ed-night-sky/hoodie/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/ed-night-sky/hoodie/dark-0.jpg",
+        "/mockups/ed-night-sky/hoodie/dark-1.jpg",
+        "/mockups/ed-night-sky/hoodie/dark-2.jpg",
+        "/mockups/ed-night-sky/hoodie/dark-3.jpg",
+        "/mockups/ed-night-sky/hoodie/dark-4.jpg",
+        "/mockups/ed-night-sky/hoodie/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "ed-night-sky-tee",
+    "printify_product_id": "69ff1eca858e3e62f1071f7d",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/ed-night-sky/tee/light-0.jpg",
+        "/mockups/ed-night-sky/tee/light-1.jpg",
+        "/mockups/ed-night-sky/tee/light-2.jpg",
+        "/mockups/ed-night-sky/tee/light-3.jpg",
+        "/mockups/ed-night-sky/tee/light-4.jpg",
+        "/mockups/ed-night-sky/tee/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/ed-night-sky/tee/dark-0.jpg",
+        "/mockups/ed-night-sky/tee/dark-1.jpg",
+        "/mockups/ed-night-sky/tee/dark-2.jpg",
+        "/mockups/ed-night-sky/tee/dark-3.jpg",
+        "/mockups/ed-night-sky/tee/dark-4.jpg",
+        "/mockups/ed-night-sky/tee/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "ed-plot-twist-hoodie",
+    "printify_product_id": "69ff2162048a81990c0b06e9",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/ed-plot-twist/hoodie/light-0.jpg",
+        "/mockups/ed-plot-twist/hoodie/light-1.jpg",
+        "/mockups/ed-plot-twist/hoodie/light-2.jpg",
+        "/mockups/ed-plot-twist/hoodie/light-3.jpg",
+        "/mockups/ed-plot-twist/hoodie/light-4.jpg",
+        "/mockups/ed-plot-twist/hoodie/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/ed-plot-twist/hoodie/dark-0.jpg",
+        "/mockups/ed-plot-twist/hoodie/dark-1.jpg",
+        "/mockups/ed-plot-twist/hoodie/dark-2.jpg",
+        "/mockups/ed-plot-twist/hoodie/dark-3.jpg",
+        "/mockups/ed-plot-twist/hoodie/dark-4.jpg",
+        "/mockups/ed-plot-twist/hoodie/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "ed-plot-twist-tee",
+    "printify_product_id": "69ff1e95048a81990c0b05c1",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/ed-plot-twist/tee/light-0.jpg",
+        "/mockups/ed-plot-twist/tee/light-1.jpg",
+        "/mockups/ed-plot-twist/tee/light-2.jpg",
+        "/mockups/ed-plot-twist/tee/light-3.jpg",
+        "/mockups/ed-plot-twist/tee/light-4.jpg",
+        "/mockups/ed-plot-twist/tee/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/ed-plot-twist/tee/dark-0.jpg",
+        "/mockups/ed-plot-twist/tee/dark-1.jpg",
+        "/mockups/ed-plot-twist/tee/dark-2.jpg",
+        "/mockups/ed-plot-twist/tee/dark-3.jpg",
+        "/mockups/ed-plot-twist/tee/dark-4.jpg",
+        "/mockups/ed-plot-twist/tee/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "ed-smallest-unit-hoodie",
+    "printify_product_id": "69ff2128b639fab5c108aa33",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/ed-smallest-unit/hoodie/light-0.jpg",
+        "/mockups/ed-smallest-unit/hoodie/light-1.jpg",
+        "/mockups/ed-smallest-unit/hoodie/light-2.jpg",
+        "/mockups/ed-smallest-unit/hoodie/light-3.jpg",
+        "/mockups/ed-smallest-unit/hoodie/light-4.jpg",
+        "/mockups/ed-smallest-unit/hoodie/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/ed-smallest-unit/hoodie/dark-0.jpg",
+        "/mockups/ed-smallest-unit/hoodie/dark-1.jpg",
+        "/mockups/ed-smallest-unit/hoodie/dark-2.jpg",
+        "/mockups/ed-smallest-unit/hoodie/dark-3.jpg",
+        "/mockups/ed-smallest-unit/hoodie/dark-4.jpg",
+        "/mockups/ed-smallest-unit/hoodie/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "ed-smallest-unit-tee",
+    "printify_product_id": "69ff1e7a07f979bbd1049260",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/ed-smallest-unit/tee/light-0.jpg",
+        "/mockups/ed-smallest-unit/tee/light-1.jpg",
+        "/mockups/ed-smallest-unit/tee/light-2.jpg",
+        "/mockups/ed-smallest-unit/tee/light-3.jpg",
+        "/mockups/ed-smallest-unit/tee/light-4.jpg",
+        "/mockups/ed-smallest-unit/tee/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/ed-smallest-unit/tee/dark-0.jpg",
+        "/mockups/ed-smallest-unit/tee/dark-1.jpg",
+        "/mockups/ed-smallest-unit/tee/dark-2.jpg",
+        "/mockups/ed-smallest-unit/tee/dark-3.jpg",
+        "/mockups/ed-smallest-unit/tee/dark-4.jpg",
+        "/mockups/ed-smallest-unit/tee/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "ed-soft-strategy-hoodie",
+    "printify_product_id": "69ff219c4ba2ff981a0204cf",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/ed-soft-strategy/hoodie/light-0.jpg",
+        "/mockups/ed-soft-strategy/hoodie/light-1.jpg",
+        "/mockups/ed-soft-strategy/hoodie/light-2.jpg",
+        "/mockups/ed-soft-strategy/hoodie/light-3.jpg",
+        "/mockups/ed-soft-strategy/hoodie/light-4.jpg",
+        "/mockups/ed-soft-strategy/hoodie/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/ed-soft-strategy/hoodie/dark-0.jpg",
+        "/mockups/ed-soft-strategy/hoodie/dark-1.jpg",
+        "/mockups/ed-soft-strategy/hoodie/dark-2.jpg",
+        "/mockups/ed-soft-strategy/hoodie/dark-3.jpg",
+        "/mockups/ed-soft-strategy/hoodie/dark-4.jpg",
+        "/mockups/ed-soft-strategy/hoodie/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "ed-soft-strategy-tee",
+    "printify_product_id": "69ff1eb04ba2ff981a02037a",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/ed-soft-strategy/tee/light-0.jpg",
+        "/mockups/ed-soft-strategy/tee/light-1.jpg",
+        "/mockups/ed-soft-strategy/tee/light-2.jpg",
+        "/mockups/ed-soft-strategy/tee/light-3.jpg",
+        "/mockups/ed-soft-strategy/tee/light-4.jpg",
+        "/mockups/ed-soft-strategy/tee/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/ed-soft-strategy/tee/dark-0.jpg",
+        "/mockups/ed-soft-strategy/tee/dark-1.jpg",
+        "/mockups/ed-soft-strategy/tee/dark-2.jpg",
+        "/mockups/ed-soft-strategy/tee/dark-3.jpg",
+        "/mockups/ed-soft-strategy/tee/dark-4.jpg",
+        "/mockups/ed-soft-strategy/tee/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "lao-tzu-step-hoodie",
+    "printify_product_id": "69ff1f844b354ada360bebec",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/lao-tzu-step/hoodie/light-0.jpg",
+        "/mockups/lao-tzu-step/hoodie/light-1.jpg",
+        "/mockups/lao-tzu-step/hoodie/light-2.jpg",
+        "/mockups/lao-tzu-step/hoodie/light-3.jpg",
+        "/mockups/lao-tzu-step/hoodie/light-4.jpg",
+        "/mockups/lao-tzu-step/hoodie/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/lao-tzu-step/hoodie/dark-0.jpg",
+        "/mockups/lao-tzu-step/hoodie/dark-1.jpg",
+        "/mockups/lao-tzu-step/hoodie/dark-2.jpg",
+        "/mockups/lao-tzu-step/hoodie/dark-3.jpg",
+        "/mockups/lao-tzu-step/hoodie/dark-4.jpg",
+        "/mockups/lao-tzu-step/hoodie/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "lao-tzu-step-tee",
+    "printify_product_id": "69ff1dbc3efb4c95d3082cbb",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/lao-tzu-step/tee/light-0.jpg",
+        "/mockups/lao-tzu-step/tee/light-1.jpg",
+        "/mockups/lao-tzu-step/tee/light-2.jpg",
+        "/mockups/lao-tzu-step/tee/light-3.jpg",
+        "/mockups/lao-tzu-step/tee/light-4.jpg",
+        "/mockups/lao-tzu-step/tee/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/lao-tzu-step/tee/dark-0.jpg",
+        "/mockups/lao-tzu-step/tee/dark-1.jpg",
+        "/mockups/lao-tzu-step/tee/dark-2.jpg",
+        "/mockups/lao-tzu-step/tee/dark-3.jpg",
+        "/mockups/lao-tzu-step/tee/dark-4.jpg",
+        "/mockups/lao-tzu-step/tee/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "rumi-seeking-hoodie",
+    "printify_product_id": "69ff20ed4ba2ff981a020470",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/rumi-seeking/hoodie/light-0.jpg",
+        "/mockups/rumi-seeking/hoodie/light-1.jpg",
+        "/mockups/rumi-seeking/hoodie/light-2.jpg",
+        "/mockups/rumi-seeking/hoodie/light-3.jpg",
+        "/mockups/rumi-seeking/hoodie/light-4.jpg",
+        "/mockups/rumi-seeking/hoodie/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/rumi-seeking/hoodie/dark-0.jpg",
+        "/mockups/rumi-seeking/hoodie/dark-1.jpg",
+        "/mockups/rumi-seeking/hoodie/dark-2.jpg",
+        "/mockups/rumi-seeking/hoodie/dark-3.jpg",
+        "/mockups/rumi-seeking/hoodie/dark-4.jpg",
+        "/mockups/rumi-seeking/hoodie/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "rumi-seeking-tee",
+    "printify_product_id": "69ff1e60f9b3c9205f105489",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/rumi-seeking/tee/light-0.jpg",
+        "/mockups/rumi-seeking/tee/light-1.jpg",
+        "/mockups/rumi-seeking/tee/light-2.jpg",
+        "/mockups/rumi-seeking/tee/light-3.jpg",
+        "/mockups/rumi-seeking/tee/light-4.jpg",
+        "/mockups/rumi-seeking/tee/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/rumi-seeking/tee/dark-0.jpg",
+        "/mockups/rumi-seeking/tee/dark-1.jpg",
+        "/mockups/rumi-seeking/tee/dark-2.jpg",
+        "/mockups/rumi-seeking/tee/dark-3.jpg",
+        "/mockups/rumi-seeking/tee/dark-4.jpg",
+        "/mockups/rumi-seeking/tee/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "thoreau-direction-hoodie",
+    "printify_product_id": "69ff1ffc048a81990c0b0659",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/thoreau-direction/hoodie/light-0.jpg",
+        "/mockups/thoreau-direction/hoodie/light-1.jpg",
+        "/mockups/thoreau-direction/hoodie/light-2.jpg",
+        "/mockups/thoreau-direction/hoodie/light-3.jpg",
+        "/mockups/thoreau-direction/hoodie/light-4.jpg",
+        "/mockups/thoreau-direction/hoodie/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/thoreau-direction/hoodie/dark-0.jpg",
+        "/mockups/thoreau-direction/hoodie/dark-1.jpg",
+        "/mockups/thoreau-direction/hoodie/dark-2.jpg",
+        "/mockups/thoreau-direction/hoodie/dark-3.jpg",
+        "/mockups/thoreau-direction/hoodie/dark-4.jpg",
+        "/mockups/thoreau-direction/hoodie/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "thoreau-direction-tee",
+    "printify_product_id": "69ff1df3b639fab5c108a8dd",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/thoreau-direction/tee/light-0.jpg",
+        "/mockups/thoreau-direction/tee/light-1.jpg",
+        "/mockups/thoreau-direction/tee/light-2.jpg",
+        "/mockups/thoreau-direction/tee/light-3.jpg",
+        "/mockups/thoreau-direction/tee/light-4.jpg",
+        "/mockups/thoreau-direction/tee/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/thoreau-direction/tee/dark-0.jpg",
+        "/mockups/thoreau-direction/tee/dark-1.jpg",
+        "/mockups/thoreau-direction/tee/dark-2.jpg",
+        "/mockups/thoreau-direction/tee/dark-3.jpg",
+        "/mockups/thoreau-direction/tee/dark-4.jpg",
+        "/mockups/thoreau-direction/tee/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "van-gogh-dream-hoodie",
+    "printify_product_id": "69ff207572bfa4db660455de",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/van-gogh-dream/hoodie/light-0.jpg",
+        "/mockups/van-gogh-dream/hoodie/light-1.jpg",
+        "/mockups/van-gogh-dream/hoodie/light-2.jpg",
+        "/mockups/van-gogh-dream/hoodie/light-3.jpg",
+        "/mockups/van-gogh-dream/hoodie/light-4.jpg",
+        "/mockups/van-gogh-dream/hoodie/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/van-gogh-dream/hoodie/dark-0.jpg",
+        "/mockups/van-gogh-dream/hoodie/dark-1.jpg",
+        "/mockups/van-gogh-dream/hoodie/dark-2.jpg",
+        "/mockups/van-gogh-dream/hoodie/dark-3.jpg",
+        "/mockups/van-gogh-dream/hoodie/dark-4.jpg",
+        "/mockups/van-gogh-dream/hoodie/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "van-gogh-dream-tee",
+    "printify_product_id": "69ff1e2a3efb4c95d3082ce4",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/van-gogh-dream/tee/light-0.jpg",
+        "/mockups/van-gogh-dream/tee/light-1.jpg",
+        "/mockups/van-gogh-dream/tee/light-2.jpg",
+        "/mockups/van-gogh-dream/tee/light-3.jpg",
+        "/mockups/van-gogh-dream/tee/light-4.jpg",
+        "/mockups/van-gogh-dream/tee/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/van-gogh-dream/tee/dark-0.jpg",
+        "/mockups/van-gogh-dream/tee/dark-1.jpg",
+        "/mockups/van-gogh-dream/tee/dark-2.jpg",
+        "/mockups/van-gogh-dream/tee/dark-3.jpg",
+        "/mockups/van-gogh-dream/tee/dark-4.jpg",
+        "/mockups/van-gogh-dream/tee/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "whitman-sunshine-hoodie",
+    "printify_product_id": "69ff203ade847272360ce7c5",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/whitman-sunshine/hoodie/light-0.jpg",
+        "/mockups/whitman-sunshine/hoodie/light-1.jpg",
+        "/mockups/whitman-sunshine/hoodie/light-2.jpg",
+        "/mockups/whitman-sunshine/hoodie/light-3.jpg",
+        "/mockups/whitman-sunshine/hoodie/light-4.jpg",
+        "/mockups/whitman-sunshine/hoodie/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/whitman-sunshine/hoodie/dark-0.jpg",
+        "/mockups/whitman-sunshine/hoodie/dark-1.jpg",
+        "/mockups/whitman-sunshine/hoodie/dark-2.jpg",
+        "/mockups/whitman-sunshine/hoodie/dark-3.jpg",
+        "/mockups/whitman-sunshine/hoodie/dark-4.jpg",
+        "/mockups/whitman-sunshine/hoodie/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "whitman-sunshine-tee",
+    "printify_product_id": "69ff1e0f72bfa4db660454e1",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/whitman-sunshine/tee/light-0.jpg",
+        "/mockups/whitman-sunshine/tee/light-1.jpg",
+        "/mockups/whitman-sunshine/tee/light-2.jpg",
+        "/mockups/whitman-sunshine/tee/light-3.jpg",
+        "/mockups/whitman-sunshine/tee/light-4.jpg",
+        "/mockups/whitman-sunshine/tee/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/whitman-sunshine/tee/dark-0.jpg",
+        "/mockups/whitman-sunshine/tee/dark-1.jpg",
+        "/mockups/whitman-sunshine/tee/dark-2.jpg",
+        "/mockups/whitman-sunshine/tee/dark-3.jpg",
+        "/mockups/whitman-sunshine/tee/dark-4.jpg",
+        "/mockups/whitman-sunshine/tee/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "wilde-stars-hoodie",
+    "printify_product_id": "69ff1fbef0f38ff1d50436e2",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/wilde-stars/hoodie/light-0.jpg",
+        "/mockups/wilde-stars/hoodie/light-1.jpg",
+        "/mockups/wilde-stars/hoodie/light-2.jpg",
+        "/mockups/wilde-stars/hoodie/light-3.jpg",
+        "/mockups/wilde-stars/hoodie/light-4.jpg",
+        "/mockups/wilde-stars/hoodie/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/wilde-stars/hoodie/dark-0.jpg",
+        "/mockups/wilde-stars/hoodie/dark-1.jpg",
+        "/mockups/wilde-stars/hoodie/dark-2.jpg",
+        "/mockups/wilde-stars/hoodie/dark-3.jpg",
+        "/mockups/wilde-stars/hoodie/dark-4.jpg",
+        "/mockups/wilde-stars/hoodie/dark-5.jpg"
+      ]
+    }
+  },
+  {
+    "slug": "wilde-stars-tee",
+    "printify_product_id": "69ff1dd8f9b3c9205f10544b",
+    "external_url": null,
+    "mockups": {
+      "light": [
+        "/mockups/wilde-stars/tee/light-0.jpg",
+        "/mockups/wilde-stars/tee/light-1.jpg",
+        "/mockups/wilde-stars/tee/light-2.jpg",
+        "/mockups/wilde-stars/tee/light-3.jpg",
+        "/mockups/wilde-stars/tee/light-4.jpg",
+        "/mockups/wilde-stars/tee/light-5.jpg"
+      ],
+      "dark": [
+        "/mockups/wilde-stars/tee/dark-0.jpg",
+        "/mockups/wilde-stars/tee/dark-1.jpg",
+        "/mockups/wilde-stars/tee/dark-2.jpg",
+        "/mockups/wilde-stars/tee/dark-3.jpg",
+        "/mockups/wilde-stars/tee/dark-4.jpg",
+        "/mockups/wilde-stars/tee/dark-5.jpg"
+      ]
+    }
+  }
+]
