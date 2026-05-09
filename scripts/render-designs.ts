@@ -15,10 +15,11 @@ import { join } from 'node:path';
 import { existsSync } from 'node:fs';
 import { QUOTES } from '../src/content/quotes';
 import { figureBySlug } from '../src/content/figures';
-import { renderDesignToPng } from '../src/design/render';
+import { renderDesignToPng, renderEditorialQuote } from '../src/design/render';
 
 const PRINT_SIZE = { width: 4500, height: 5400 } as const;
 const PREVIEW_SIZE = { width: 1200, height: 1440 } as const;
+const EDITORIAL_SIZE = { width: 1200, height: 1440 } as const;
 
 const PREVIEW_BG = {
   light: '#F8F4EC', // cream
@@ -29,6 +30,7 @@ async function renderOne(quote_id: string, opts: {
   outDir: string;
   print: boolean;
   preview: boolean;
+  editorial: boolean;
 }) {
   const quote = QUOTES.find((q) => q.id === quote_id);
   if (!quote) throw new Error(`unknown quote: ${quote_id}`);
@@ -58,6 +60,19 @@ async function renderOne(quote_id: string, opts: {
     await writeFile(join(opts.outDir, r.name), png);
     bytes.push(png.length);
   }
+
+  if (opts.editorial) {
+    const png = await renderEditorialQuote({
+      quote,
+      width: EDITORIAL_SIZE.width,
+      height: EDITORIAL_SIZE.height,
+      background: '#0E0D0C', // deeper than ink — reads as black on the grid
+      foreground: '#F8F4EC',
+    });
+    await writeFile(join(opts.outDir, `${quote_id}-editorial-black.png`), png);
+    bytes.push(png.length);
+  }
+
   return bytes;
 }
 
@@ -66,6 +81,7 @@ async function main() {
   const filter = args.find((a) => !a.startsWith('--'));
   const skipPrint = args.includes('--no-print');
   const skipPreview = args.includes('--no-preview');
+  const skipEditorial = args.includes('--no-editorial');
 
   const targets = filter ? QUOTES.filter((q) => q.id === filter) : QUOTES;
   if (targets.length === 0) {
@@ -82,7 +98,7 @@ async function main() {
     process.exit(1);
   }
 
-  const variants = (skipPrint ? 0 : 2) + (skipPreview ? 0 : 2);
+  const variants = (skipPrint ? 0 : 2) + (skipPreview ? 0 : 2) + (skipEditorial ? 0 : 1);
   console.log(`Rendering ${targets.length} quote(s) × ${variants} variant(s) = ${targets.length * variants} PNG(s)…\n`);
   const start = Date.now();
 
@@ -94,6 +110,7 @@ async function main() {
         outDir,
         print: !skipPrint,
         preview: !skipPreview,
+        editorial: !skipEditorial,
       });
       const totalKb = (bytes.reduce((a, b) => a + b, 0) / 1024).toFixed(0);
       console.log(`  ✓ ${quote.id.padEnd(28)}  ${variants} variant(s)  ${totalKb}KB total`);

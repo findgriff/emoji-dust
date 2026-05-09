@@ -16,15 +16,49 @@ const CATEGORY_LABEL: Record<Category, string> = {
   detail: 'Detail',
 };
 
-/** Flatten categorized mockups into an ordered list. on_model first. */
-function flatten(group: Record<Category, string[]>): { url: string; category: Category }[] {
-  const out: { url: string; category: Category }[] = [];
-  for (const cat of CATEGORY_ORDER) {
-    for (const url of group[cat] ?? []) {
-      out.push({ url, category: cat });
+type GalleryItem =
+  | { kind: 'mockup'; url: string; label: string; bg: 'light' | 'dark' }
+  | { kind: 'design_preview'; url: string; label: string; bg: 'light' | 'dark' }
+  | { kind: 'editorial'; url: string; label: string; bg: 'light' | 'dark' };
+
+/**
+ * Build the full image rail for a product.
+ * Per the brief: regardless of which tile the customer clicked, the detail
+ * page must show all three contexts:
+ *   1. The product on a model / lifestyle mockup
+ *   2. The pure design preview
+ *   3. The editorial "quote only" treatment on black
+ */
+function buildItems(product: Product, mode: Mode): GalleryItem[] {
+  const items: GalleryItem[] = [];
+  const mockups = product.mockups?.[mode];
+
+  // 1. mockups in priority order (model first, then front, back, detail)
+  if (mockups) {
+    for (const cat of CATEGORY_ORDER) {
+      for (const url of mockups[cat] ?? []) {
+        items.push({ kind: 'mockup', url, label: CATEGORY_LABEL[cat], bg: mode });
+      }
     }
   }
-  return out;
+
+  // 2. design preview (the pure rendered design on a coloured tile)
+  items.push({
+    kind: 'design_preview',
+    url: mode === 'light' ? product.artwork_light_preview : product.artwork_dark_preview,
+    label: 'Design',
+    bg: mode,
+  });
+
+  // 3. editorial black-tile treatment — quote only, austere
+  items.push({
+    kind: 'editorial',
+    url: product.editorial_image,
+    label: 'Quote only',
+    bg: 'dark',
+  });
+
+  return items;
 }
 
 export function ProductGallery({ product }: { product: Product }) {
@@ -32,18 +66,9 @@ export function ProductGallery({ product }: { product: Product }) {
   const [mode, setMode] = useState<Mode>('light');
   const [activeIdx, setActiveIdx] = useState(0);
 
-  const designSrc = mode === 'light' ? product.artwork_light_preview : product.artwork_dark_preview;
-  const themeMockups = product.mockups?.[mode];
-  const flat = useMemo(
-    () => (themeMockups ? flatten(themeMockups) : []),
-    [themeMockups]
-  );
-
-  // Reset active index when mode changes
-  const safeIdx = activeIdx < flat.length ? activeIdx : 0;
-  const showingMockup = flat.length > 0 && activeIdx < flat.length;
-  const currentSrc = showingMockup ? flat[safeIdx].url : designSrc;
-  const currentLabel = showingMockup ? CATEGORY_LABEL[flat[safeIdx].category] : 'Design preview';
+  const items = useMemo(() => buildItems(product, mode), [product, mode]);
+  const safeIdx = activeIdx < items.length ? activeIdx : 0;
+  const current = items[safeIdx];
 
   const switchMode = (m: Mode) => {
     setMode(m);
@@ -53,9 +78,13 @@ export function ProductGallery({ product }: { product: Product }) {
   return (
     <div className="lg:sticky lg:top-24">
       {/* main image */}
-      <div className={`relative aspect-[5/6] rounded-2xl overflow-hidden border border-ink/5 ${mode === 'dark' ? 'bg-ink' : 'bg-cream-deep/60'}`}>
+      <div
+        className={`relative aspect-[5/6] rounded-2xl overflow-hidden border border-ink/5 ${
+          current?.bg === 'dark' ? 'bg-ink' : 'bg-cream-deep/60'
+        }`}
+      >
         <Image
-          src={currentSrc}
+          src={current.url}
           alt={product.title}
           fill
           priority
@@ -63,20 +92,15 @@ export function ProductGallery({ product }: { product: Product }) {
           sizes="(max-width: 1024px) 100vw, 600px"
         />
         <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-cream/95 text-[11px] font-medium tracking-widest uppercase text-ink/70 border border-ink/5">
-          {currentLabel}
+          {current.label}
         </div>
-        {flat.length > 1 && (
+        {items.length > 1 && (
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 px-2 py-1 rounded-full bg-cream/80 backdrop-blur">
-            <button
-              onClick={() => setActiveIdx(-1)}
-              className={`w-1.5 h-1.5 rounded-full transition ${!showingMockup ? 'bg-ink w-4' : 'bg-ink/30'}`}
-              aria-label="Show design preview"
-            />
-            {flat.map((_, i) => (
+            {items.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setActiveIdx(i)}
-                className={`w-1.5 h-1.5 rounded-full transition ${showingMockup && safeIdx === i ? 'bg-ink w-4' : 'bg-ink/30'}`}
+                className={`h-1.5 rounded-full transition-all ${safeIdx === i ? 'bg-ink w-4' : 'bg-ink/30 w-1.5'}`}
                 aria-label={`View ${i + 1}`}
               />
             ))}
@@ -85,27 +109,19 @@ export function ProductGallery({ product }: { product: Product }) {
       </div>
 
       {/* thumbnail rail */}
-      {flat.length > 0 && (
+      {items.length > 1 && (
         <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
-          <button
-            onClick={() => setActiveIdx(-1)}
-            className={`relative w-16 h-20 rounded-md overflow-hidden border-2 shrink-0 ${
-              !showingMockup ? 'border-ink' : 'border-transparent opacity-70 hover:opacity-100'
-            } ${mode === 'dark' ? 'bg-ink' : 'bg-cream-deep/60'}`}
-            aria-label="Design preview"
-          >
-            <Image src={designSrc} alt="" fill sizes="64px" className="object-cover" />
-          </button>
-          {flat.map((m, i) => (
+          {items.map((it, i) => (
             <button
               key={i}
               onClick={() => setActiveIdx(i)}
-              className={`relative w-16 h-20 rounded-md overflow-hidden border-2 shrink-0 ${
-                showingMockup && safeIdx === i ? 'border-ink' : 'border-transparent opacity-70 hover:opacity-100'
-              }`}
-              aria-label={`Thumbnail ${i + 1} ${CATEGORY_LABEL[m.category]}`}
+              className={`relative w-16 h-20 rounded-md overflow-hidden border-2 shrink-0 transition ${
+                safeIdx === i ? 'border-ink' : 'border-transparent opacity-70 hover:opacity-100'
+              } ${it.bg === 'dark' ? 'bg-ink' : 'bg-cream-deep/60'}`}
+              aria-label={`Thumbnail ${i + 1}: ${it.label}`}
+              title={it.label}
             >
-              <Image src={m.url} alt="" fill sizes="64px" className="object-cover" />
+              <Image src={it.url} alt="" fill sizes="64px" className="object-cover" />
             </button>
           ))}
         </div>

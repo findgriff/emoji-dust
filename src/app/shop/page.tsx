@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { ProductCard } from '@/components/product-card';
+import { AlternatingGrid } from '@/components/alternating-grid';
 import { PRODUCTS } from '@/content/products';
 import { CATALOG, type ProductKind } from '@/content/catalog';
 
@@ -51,11 +51,7 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
       </div>
 
       <Suspense>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-10">
-          {filtered.map((p, i) => (
-            <ProductCard key={p.slug} product={p} priority={i < 8} />
-          ))}
-        </div>
+        <AlternatingGrid products={filtered} />
       </Suspense>
     </div>
   );

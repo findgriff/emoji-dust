@@ -51,6 +51,7 @@ export const PRODUCTS: Product[] = QUOTES.flatMap((q) =>
       retail_pence: CATALOG[kind].retail_pence,
       artwork_light_preview: `/designs/${q.id}-preview-light.png`,
       artwork_dark_preview: `/designs/${q.id}-preview-dark.png`,
+      editorial_image: `/designs/${q.id}-editorial-black.png`,
       printify_product_id: m?.printify_product_id,
       printify_external_url: m?.external_url ?? undefined,
       mockups: m?.mockups_v2,

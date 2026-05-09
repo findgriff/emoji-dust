@@ -14,6 +14,7 @@ import { Resvg } from '@resvg/resvg-js';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { MinimalSerifTemplate, type Theme } from './templates/minimal-serif';
+import { MinimalQuoteTemplate } from './templates/minimal-quote';
 import type { Quote } from '@/content/quotes';
 import type { Figure } from '@/content/figures';
 
@@ -124,3 +125,29 @@ export const CANVAS_SIZE = {
   // Mug wrap (separate template handles this — placeholder)
   mug: { width: 2700, height: 1050 },
 } as const;
+
+/**
+ * Render a "quote-only" editorial graphic — just the quote, no decoration,
+ * on a solid background. Used as the alternating tile in the shop grid.
+ */
+export type EditorialOptions = {
+  quote: Quote;
+  width: number;
+  height: number;
+  background: string;
+  foreground: string;
+};
+
+export async function renderEditorialQuote(opts: EditorialOptions): Promise<Buffer> {
+  const fonts = await loadFonts();
+  const svg = await satori(MinimalQuoteTemplate(opts), {
+    width: opts.width,
+    height: opts.height,
+    fonts: fonts.map((f) => ({ name: f.name, data: f.data, weight: f.weight, style: f.style })),
+  });
+  const resvg = new Resvg(svg, {
+    fitTo: { mode: 'width', value: opts.width },
+    background: opts.background,
+  });
+  return resvg.render().asPng();
+}

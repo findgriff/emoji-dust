@@ -156,6 +156,9 @@ export type Product = {
   printify_product_id?: string;
   artwork_light_preview: string;
   artwork_dark_preview: string;
+  /** Editorial graphic — quote text on black, no decoration. Used in shop
+      grid alternation tiles + product page detail rail. */
+  editorial_image: string;
   /** Categorized Printify mockups, populated by `pnpm mockups:remirror`. */
   mockups?: {
     light: { on_model: string[]; flat_front: string[]; flat_back: string[]; detail: string[] };
