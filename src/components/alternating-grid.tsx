@@ -56,11 +56,51 @@ function EditorialCard({ product, priority = false }: { product: Product; priori
   );
 }
 
+/**
+ * A product "has a real mockup" when Printify gave us at least one model
+ * shot, lifestyle shot, or flat-front. Products without a mockup fall back
+ * to the rendered design preview — fine on editorial tiles, less hero-y on
+ * the regular tile slots.
+ */
+function hasMockup(p: Product): boolean {
+  const m = p.mockups?.light;
+  if (!m) return false;
+  return (m.on_model.length + m.flat_front.length + m.flat_back.length + m.detail.length) > 0;
+}
+
+/**
+ * Order products so the FIRST products with real Printify mockups land on
+ * even indices (regular product tiles), and unmockup'd products fill odd
+ * indices (editorial tiles, where no mockup is needed). Stable within each
+ * partition — preserves catalogue order otherwise.
+ */
+function interleaveForAlternation(products: Product[]): Product[] {
+  const mocked: Product[] = [];
+  const rest: Product[] = [];
+  for (const p of products) (hasMockup(p) ? mocked : rest).push(p);
+
+  const out: Product[] = [];
+  let mi = 0;
+  let ri = 0;
+  for (let i = 0; i < products.length; i++) {
+    if (i % 2 === 0) {
+      // even slot — render as product card → prefer a real-mockup product
+      if (mi < mocked.length) out.push(mocked[mi++]);
+      else out.push(rest[ri++]);
+    } else {
+      // odd slot — editorial card → mockup not required
+      if (ri < rest.length) out.push(rest[ri++]);
+      else out.push(mocked[mi++]);
+    }
+  }
+  return out;
+}
+
 export function AlternatingGrid({ products }: { products: Product[] }) {
+  const ordered = interleaveForAlternation(products);
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-10">
-      {products.map((p, i) => {
-        // even = product mockup tile, odd = editorial tile
+      {ordered.map((p, i) => {
         const isEditorial = i % 2 === 1;
         const Card = isEditorial ? EditorialCard : ProductCard;
         return <Card key={p.slug} product={p} priority={i < 8} />;
