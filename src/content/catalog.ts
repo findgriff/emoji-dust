@@ -141,9 +141,10 @@ export const CATALOG: Record<ProductKind, CatalogEntry> = {
  * Canonical product type — what gets listed on the storefront.
  * One quote × one product kind = one product. Slug is stable.
  *
- * Each product has TWO previews: one for light shirt colours (dark text),
- * one for dark shirt colours (white text). The product page swaps them
- * based on which colour the customer has selected.
+ * Each product has TWO design previews (light + dark) plus, when synced to
+ * Printify, a structured set of mockup imagery categorized by camera angle:
+ * on_model (where the provider supplies model shots), flat_front, flat_back,
+ * and detail (folded / hanging).
  */
 export type Product = {
   slug: string;
@@ -153,10 +154,13 @@ export type Product = {
   retail_pence: number;
   printify_external_url?: string;
   printify_product_id?: string;
-  artwork_light_preview: string; // /designs/<quote_id>-preview-light.png
-  artwork_dark_preview: string;  // /designs/<quote_id>-preview-dark.png
-  /** Mockups mirrored from Printify after sync, keyed by colour name. */
-  mockups?: Record<string, { url: string; position: string }[]>;
+  artwork_light_preview: string;
+  artwork_dark_preview: string;
+  /** Categorized Printify mockups, populated by `pnpm mockups:remirror`. */
+  mockups?: {
+    light: { on_model: string[]; flat_front: string[]; flat_back: string[]; detail: string[] };
+    dark: { on_model: string[]; flat_front: string[]; flat_back: string[]; detail: string[] };
+  };
 };
 
 export const productSlug = (quote_id: string, kind: ProductKind) => `${quote_id}-${kind}`;

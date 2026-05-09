@@ -5,36 +5,45 @@ import { CATALOG, formatPrice } from '@/content/catalog';
 import { quoteById } from '@/content/quotes';
 import { figureBySlug } from '@/content/figures';
 
+/**
+ * Pick the hero image for a browse tile.
+ * Priority: on-model mockup → flat-front mockup → rendered design preview.
+ * Falling back to the design preview keeps cards uniform when sync hasn't run.
+ */
+function heroImage(product: Product): { src: string; isModel: boolean } {
+  const m = product.mockups?.light;
+  if (m?.on_model?.[0]) return { src: m.on_model[0], isModel: true };
+  if (m?.flat_front?.[0]) return { src: m.flat_front[0], isModel: false };
+  return { src: product.artwork_light_preview, isModel: false };
+}
+
 export function ProductCard({ product, priority = false }: { product: Product; priority?: boolean }) {
   const quote = quoteById(product.quote_id);
   const figure = quote?.figure_slug ? figureBySlug(quote.figure_slug) ?? null : null;
   const kindMeta = CATALOG[product.kind];
+  const hero = heroImage(product);
+  const hasDarkVariant = (product.mockups?.dark?.on_model?.[0] || product.mockups?.dark?.flat_front?.[0]);
 
   return (
     <Link href={`/p/${product.slug}`} className="lift block group">
       <div className="relative aspect-[5/6] overflow-hidden rounded-xl bg-cream-deep/60 border border-ink/5">
         <Image
-          src={product.artwork_light_preview}
+          src={hero.src}
           alt={`${quote?.text} — ${kindMeta.hero_label}`}
           fill
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           priority={priority}
           className="object-cover"
         />
-        {kindMeta.supports_dark && (
-          <div className="absolute bottom-3 right-3 w-10 h-12 rounded-md overflow-hidden border-2 border-cream/95 shadow-md">
-            <Image
-              src={product.artwork_dark_preview}
-              alt=""
-              fill
-              sizes="40px"
-              className="object-cover"
-            />
-          </div>
-        )}
         <div className="absolute top-3 left-3 px-2 py-1 rounded-full bg-cream/90 text-[10px] font-medium tracking-wider uppercase text-ink/70">
           {kindMeta.hero_label}
         </div>
+        {hasDarkVariant && (
+          <div className="absolute bottom-3 right-3 flex gap-1">
+            <span className="w-3 h-3 rounded-full border border-cream/95 bg-cream shadow" />
+            <span className="w-3 h-3 rounded-full border border-cream/95 bg-ink shadow" />
+          </div>
+        )}
       </div>
       <div className="mt-3 flex items-start justify-between gap-3">
         <div className="min-w-0">

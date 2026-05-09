@@ -12,11 +12,19 @@ import productsData from '../../data/products.json' with { type: 'json' };
 
 const KINDS: ProductKind[] = ['tee', 'tank', 'hoodie', 'mug'];
 
+type CategorizedMockups = {
+  on_model: string[];
+  flat_front: string[];
+  flat_back: string[];
+  detail: string[];
+};
+
 type Mapping = {
   slug: string;
   printify_product_id: string;
   external_url: string | null;
-  mockups: { light: string[]; dark: string[] };
+  mockups?: { light: string[]; dark: string[] }; // legacy, ignored
+  mockups_v2?: { light: CategorizedMockups; dark: CategorizedMockups };
 };
 
 const MAPPINGS = new Map<string, Mapping>(
@@ -45,12 +53,7 @@ export const PRODUCTS: Product[] = QUOTES.flatMap((q) =>
       artwork_dark_preview: `/designs/${q.id}-preview-dark.png`,
       printify_product_id: m?.printify_product_id,
       printify_external_url: m?.external_url ?? undefined,
-      mockups: m
-        ? {
-            light: m.mockups.light.map((url, i) => ({ url, position: i === 0 ? 'front' : 'lifestyle' })),
-            dark: m.mockups.dark.map((url, i) => ({ url, position: i === 0 ? 'front' : 'lifestyle' })),
-          }
-        : undefined,
+      mockups: m?.mockups_v2,
     };
   })
 );
