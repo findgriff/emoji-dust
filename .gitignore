@@ -1,0 +1,36 @@
+# env / secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# node / next
+node_modules
+.next
+out
+dist
+.turbo
+*.tsbuildinfo
+.vercel
+
+# os
+.DS_Store
+Thumbs.db
+
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# editors
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.swp
+
+# scratch / probes
+scripts/_probe-out/
+*.probe.json
