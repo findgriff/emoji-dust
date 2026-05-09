@@ -18,6 +18,31 @@ The following choices are settled. Sub-project specs may refine but should not r
 | Q3 | Brand tone | **Playful-premium hybrid — "winking philosopher"** — emoji as jewellery, not full costume | Logo signals warmth + wink; brief signals weight + minimalism; this is the bridge |
 | Q4 | Attribution placement | **A as default, C for unreliable substrates.** Wearable apparel: small attribution under the EMOJI DUST signature on the design itself. Mugs and small placements: attribution lives on the product page + inside care label only. | Honest credit, customer sees the figure's name, brand still signs the work |
 | Q5 | Tech stack + hosting | **Stack A: Next.js 15 App Router + Tailwind + shadcn/ui + Postgres on Neon + Clerk auth + Cloudflare R2 storage + Satori rendering, deployed to Vercel** | Fastest path to a production storefront, best DX, ~£20–40/mo at MVP scale |
+| Q6 | Checkout architecture | **Printify-as-checkout via Pop-Up Store** — every Buy button deep-links to the Printify Pop-Up listing for that product. Printify handles cart, payment, dispatch, delivery, returns, customer service. | Owner decision 2026-05-09. Removes Stripe + customer accounts + order management entirely. Faster MVP. Trade-off: customers see Printify-branded checkout, not our domain. Acceptable at this stage. |
+
+### Consequences of Q6 (the Printify-as-checkout pivot)
+
+What's REMOVED from the architecture:
+- Stripe integration (was post-MVP anyway, now deleted from roadmap)
+- Customer accounts (Clerk used only for admin gating)
+- Order management UI / order history pages
+- Transactional email (Printify sends those)
+- VAT / tax handling on our side (Printify handles)
+- Cart / checkout flows / payment intents
+- Sub-projects #6 (Checkout) and #7 (Customer accounts) — gone
+
+What CHANGES in the architecture:
+- `products` table gets a `printify_external_url` column — captured at create time, deep-linked from Buy button
+- Product page CTA becomes "Buy on Printify" → `target="_blank"` to the Pop-Up URL
+- Site is fundamentally a brand showcase + product gallery; Printify is the merchant of record
+- Owner manually creates a "Pop-Up Store" channel in Printify dashboard (API doesn't support shop creation — confirmed 405 on POST /v1/shops.json)
+
+What REMAINS unchanged:
+- All quote/design generation infrastructure
+- Drizzle schema for quotes/figures/designs/products/variants/mockups
+- Satori rendering pipeline
+- Admin workflow for approving quotes/designs/products
+- Printify catalog mirror + product creation flow (we still create products via API; we just don't take orders)
 
 The combined effect: a typographically-driven storefront where playful wit and reverence for great minds coexist, fulfilled by UK printers, deployable in days not months, costing tens of pounds a month until traction justifies more.
 
@@ -248,6 +273,7 @@ create table products (
   provider_id     int not null references printify_providers(id),
   printify_product_id text,                                  -- set after Printify create
   printify_shop_id   int,
+  printify_external_url text,                                -- Pop-Up listing URL for "Buy on Printify" CTA (Q6)
   title           text not null,                             -- shown on product page
   description     text,                                      -- generated from quote/figure
   base_price_pence int not null,                             -- our retail price in GBP pence
@@ -556,8 +582,8 @@ The work decomposes into five sub-projects. Each has its own design spec → imp
 | **3** | **Printify sync layer** | Catalog mirror cron, upload + product create flow, mockup mirror, Inngest job orchestration | 2–3 days | #1, plus owner creates EMOJI DUST shop in Printify |
 | **4** | **Admin workflow UI** | All `/admin/**` pages above, audit log, end-to-end "approve quote → live product in 5 min" | 3–4 days | #2, #3 |
 | **5** | **Public storefront** | Landing, shop browse, product page, MDX marketing pages, performance hardening | 4–5 days | #4 (some products live to display) |
-| 6 *(post-MVP)* | Checkout + orders | Stripe Checkout, order webhook → Printify order submit, customer order page | 3–4 days | live storefront, Stripe credentials |
-| 7 *(post-MVP)* | Customer accounts + email | Clerk customer tier, order history, transactional emails via Resend | 2–3 days | #6 |
+| ~~6~~ | ~~Checkout + orders~~ | **DELETED by Q6 pivot** — Printify Pop-Up handles all transactions | — | — |
+| ~~7~~ | ~~Customer accounts + email~~ | **DELETED by Q6 pivot** — Printify Pop-Up handles all customer-facing post-purchase | — | — |
 
 **Total MVP effort: ~14–19 focused days.** Realistically 3–4 calendar weeks at sustainable pace.
 

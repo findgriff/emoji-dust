@@ -1,0 +1,421 @@
+/**
+ * The seed catalogue. Two kinds:
+ *  - kind="attributed": real quote from a public-domain figure (life+70 expired).
+ *  - kind="aphorism":   original EMOJI DUST line, no figure attribution.
+ *
+ * Each quote carries:
+ *  - id            stable, used as URL slug component
+ *  - text          the line itself, sentence case, quotation marks excluded
+ *  - emoji         single emoji that pivots the design (or undefined)
+ *  - themes        free-form tags for browse / cross-link
+ *  - source_work   for attributed: name of the work + year if known
+ */
+
+export type Quote = {
+  id: string;
+  kind: 'attributed' | 'aphorism';
+  text: string;
+  figure_slug?: string;
+  source_work?: string;
+  source_year?: number;
+  emoji?: string;
+  themes: string[];
+};
+
+export const QUOTES: Quote[] = [
+  // ─── Stoic & classical ────────────────────────────────────────────
+  {
+    id: 'aurelius-impediment',
+    kind: 'attributed',
+    figure_slug: 'marcus-aurelius',
+    text: 'The impediment to action advances action. What stands in the way becomes the way.',
+    source_work: 'Meditations',
+    source_year: 170,
+    emoji: '🌱',
+    themes: ['action', 'resilience', 'stoicism'],
+  },
+  {
+    id: 'aurelius-mind',
+    kind: 'attributed',
+    figure_slug: 'marcus-aurelius',
+    text: 'You have power over your mind — not outside events. Realise this, and you will find strength.',
+    source_work: 'Meditations',
+    source_year: 170,
+    themes: ['mind', 'control', 'stoicism'],
+  },
+  {
+    id: 'aurelius-thoughts',
+    kind: 'attributed',
+    figure_slug: 'marcus-aurelius',
+    text: 'The happiness of your life depends upon the quality of your thoughts.',
+    source_work: 'Meditations',
+    source_year: 170,
+    emoji: '✨',
+    themes: ['mind', 'happiness', 'stoicism'],
+  },
+  {
+    id: 'seneca-imagination',
+    kind: 'attributed',
+    figure_slug: 'seneca',
+    text: 'We suffer more often in imagination than in reality.',
+    source_work: 'Letters to Lucilius',
+    source_year: 65,
+    themes: ['mind', 'anxiety', 'stoicism'],
+  },
+  {
+    id: 'seneca-luck',
+    kind: 'attributed',
+    figure_slug: 'seneca',
+    text: 'Luck is what happens when preparation meets opportunity.',
+    source_work: 'Letters to Lucilius',
+    source_year: 65,
+    emoji: '🍀',
+    themes: ['preparation', 'work', 'stoicism'],
+  },
+  {
+    id: 'epictetus-react',
+    kind: 'attributed',
+    figure_slug: 'epictetus',
+    text: 'It is not what happens to you, but how you react to it that matters.',
+    source_work: 'Discourses',
+    source_year: 108,
+    themes: ['response', 'mind', 'stoicism'],
+  },
+  {
+    id: 'epictetus-wealth',
+    kind: 'attributed',
+    figure_slug: 'epictetus',
+    text: 'Wealth consists not in having great possessions, but in having few wants.',
+    source_work: 'Discourses',
+    source_year: 108,
+    themes: ['minimalism', 'wealth', 'stoicism'],
+  },
+  {
+    id: 'heraclitus-river',
+    kind: 'attributed',
+    figure_slug: 'heraclitus',
+    text: 'No one ever steps in the same river twice.',
+    source_year: -500,
+    emoji: '🌊',
+    themes: ['change', 'time', 'philosophy'],
+  },
+  {
+    id: 'lao-tzu-step',
+    kind: 'attributed',
+    figure_slug: 'lao-tzu',
+    text: 'The journey of a thousand miles begins with a single step.',
+    source_work: 'Tao Te Ching',
+    source_year: -500,
+    emoji: '👣',
+    themes: ['beginning', 'patience', 'taoism'],
+  },
+  {
+    id: 'lao-tzu-letting-go',
+    kind: 'attributed',
+    figure_slug: 'lao-tzu',
+    text: 'When I let go of what I am, I become what I might be.',
+    source_work: 'Tao Te Ching',
+    source_year: -500,
+    themes: ['change', 'identity', 'taoism'],
+  },
+  {
+    id: 'confucius-rising',
+    kind: 'attributed',
+    figure_slug: 'confucius',
+    text: 'Our greatest glory is not in never falling, but in rising every time we fall.',
+    source_work: 'Analects',
+    source_year: -450,
+    themes: ['resilience', 'perseverance'],
+  },
+  {
+    id: 'aristotle-habit',
+    kind: 'attributed',
+    figure_slug: 'aristotle',
+    text: 'We are what we repeatedly do. Excellence, then, is not an act, but a habit.',
+    source_work: 'Nicomachean Ethics',
+    source_year: -340,
+    themes: ['habit', 'work', 'craft'],
+  },
+  {
+    id: 'plato-beginning',
+    kind: 'attributed',
+    figure_slug: 'plato',
+    text: 'The beginning is the most important part of the work.',
+    source_work: 'The Republic',
+    source_year: -375,
+    themes: ['beginning', 'work'],
+  },
+  {
+    id: 'socrates-examined',
+    kind: 'attributed',
+    figure_slug: 'socrates',
+    text: 'The unexamined life is not worth living.',
+    source_year: -399,
+    themes: ['mind', 'philosophy', 'self'],
+  },
+
+  // ─── 19th-century literary ────────────────────────────────────────
+  {
+    id: 'wilde-yourself',
+    kind: 'attributed',
+    figure_slug: 'oscar-wilde',
+    text: 'Be yourself; everyone else is already taken.',
+    emoji: '✨',
+    themes: ['self', 'authenticity', 'wit'],
+  },
+  {
+    id: 'wilde-stars',
+    kind: 'attributed',
+    figure_slug: 'oscar-wilde',
+    text: 'We are all in the gutter, but some of us are looking at the stars.',
+    source_work: 'Lady Windermere\'s Fan',
+    source_year: 1892,
+    emoji: '⭐',
+    themes: ['hope', 'wonder', 'wit'],
+  },
+  {
+    id: 'twain-twenty-years',
+    kind: 'attributed',
+    figure_slug: 'mark-twain',
+    text: 'Twenty years from now you will be more disappointed by the things you didn\'t do than by the ones you did.',
+    themes: ['action', 'regret', 'courage'],
+  },
+  {
+    id: 'twain-two-days',
+    kind: 'attributed',
+    figure_slug: 'mark-twain',
+    text: 'The two most important days in your life are the day you are born and the day you find out why.',
+    themes: ['purpose', 'meaning'],
+  },
+  {
+    id: 'thoreau-direction',
+    kind: 'attributed',
+    figure_slug: 'henry-david-thoreau',
+    text: 'Go confidently in the direction of your dreams. Live the life you have imagined.',
+    source_work: 'Walden',
+    source_year: 1854,
+    emoji: '🌅',
+    themes: ['dreams', 'courage', 'purpose'],
+  },
+  {
+    id: 'thoreau-see',
+    kind: 'attributed',
+    figure_slug: 'henry-david-thoreau',
+    text: 'It is not what you look at that matters, it is what you see.',
+    themes: ['perception', 'attention'],
+  },
+  {
+    id: 'emerson-trail',
+    kind: 'attributed',
+    figure_slug: 'ralph-waldo-emerson',
+    text: 'Do not go where the path may lead. Go instead where there is no path and leave a trail.',
+    emoji: '🌿',
+    themes: ['courage', 'originality', 'work'],
+  },
+  {
+    id: 'emerson-speaks',
+    kind: 'attributed',
+    figure_slug: 'ralph-waldo-emerson',
+    text: 'What you do speaks so loudly I cannot hear what you say.',
+    themes: ['action', 'integrity'],
+  },
+  {
+    id: 'whitman-sunshine',
+    kind: 'attributed',
+    figure_slug: 'walt-whitman',
+    text: 'Keep your face always toward the sunshine — and shadows will fall behind you.',
+    emoji: '🌞',
+    themes: ['optimism', 'hope'],
+  },
+  {
+    id: 'nietzsche-why',
+    kind: 'attributed',
+    figure_slug: 'friedrich-nietzsche',
+    text: 'He who has a why to live for can bear almost any how.',
+    source_work: 'Twilight of the Idols',
+    source_year: 1889,
+    themes: ['purpose', 'resilience'],
+  },
+  {
+    id: 'van-gogh-dream',
+    kind: 'attributed',
+    figure_slug: 'vincent-van-gogh',
+    text: 'I dream my painting, and then I paint my dream.',
+    emoji: '🎨',
+    themes: ['creativity', 'art', 'imagination'],
+  },
+  {
+    id: 'da-vinci-simplicity',
+    kind: 'attributed',
+    figure_slug: 'leonardo-da-vinci',
+    text: 'Simplicity is the ultimate sophistication.',
+    themes: ['craft', 'minimalism', 'design'],
+  },
+  {
+    id: 'shakespeare-true',
+    kind: 'attributed',
+    figure_slug: 'william-shakespeare',
+    text: 'To thine own self be true.',
+    source_work: 'Hamlet',
+    source_year: 1603,
+    themes: ['authenticity', 'self'],
+  },
+  {
+    id: 'rumi-seeking',
+    kind: 'attributed',
+    figure_slug: 'rumi',
+    text: 'What you seek is seeking you.',
+    emoji: '💫',
+    themes: ['seeking', 'wonder', 'sufism'],
+  },
+  {
+    id: 'einstein-imagination',
+    kind: 'attributed',
+    figure_slug: 'einstein',
+    text: 'Imagination is more important than knowledge.',
+    themes: ['creativity', 'imagination'],
+  },
+  {
+    id: 'austen-pleasure',
+    kind: 'attributed',
+    figure_slug: 'jane-austen',
+    text: 'There is no charm equal to tenderness of heart.',
+    source_work: 'Emma',
+    source_year: 1816,
+    emoji: '🤍',
+    themes: ['kindness', 'love'],
+  },
+
+  // ─── EMOJI DUST originals (kind=aphorism) ─────────────────────────
+  {
+    id: 'ed-smallest-unit',
+    kind: 'aphorism',
+    text: 'Today is the smallest unit of forever.',
+    emoji: '✨',
+    themes: ['present', 'time'],
+  },
+  {
+    id: 'ed-long-walk',
+    kind: 'aphorism',
+    text: 'Be the kind of person you would follow on a long walk.',
+    themes: ['self', 'integrity'],
+  },
+  {
+    id: 'ed-plot-twist',
+    kind: 'aphorism',
+    text: 'The best plot twist is choosing yourself again.',
+    emoji: '🌅',
+    themes: ['self', 'courage'],
+  },
+  {
+    id: 'ed-rest-accomplice',
+    kind: 'aphorism',
+    text: 'Rest is not the opposite of work. It is its accomplice.',
+    themes: ['rest', 'work'],
+  },
+  {
+    id: 'ed-mid-arrival',
+    kind: 'aphorism',
+    text: 'You are not behind. You are exactly mid-arrival.',
+    themes: ['patience', 'pace'],
+  },
+  {
+    id: 'ed-soft-strategy',
+    kind: 'aphorism',
+    text: 'Soft is also a strategy.',
+    emoji: '🤍',
+    themes: ['kindness', 'strength'],
+  },
+  {
+    id: 'ed-dream-loud',
+    kind: 'aphorism',
+    text: 'Dream loud. Iterate quietly.',
+    themes: ['craft', 'work'],
+  },
+  {
+    id: 'ed-obvious-thing',
+    kind: 'aphorism',
+    text: 'The world rewards the obvious thing done with care.',
+    themes: ['craft', 'work'],
+  },
+  {
+    id: 'ed-no-new-feelings',
+    kind: 'aphorism',
+    text: 'There are no new feelings — only new dance partners.',
+    emoji: '💃',
+    themes: ['feelings', 'wit'],
+  },
+  {
+    id: 'ed-start-tuesday',
+    kind: 'aphorism',
+    text: 'You are allowed to start a Tuesday.',
+    themes: ['beginning', 'permission'],
+  },
+  {
+    id: 'ed-little-hope',
+    kind: 'aphorism',
+    text: 'A little hope is technically infinite hope.',
+    emoji: '✨',
+    themes: ['hope'],
+  },
+  {
+    id: 'ed-friend-22',
+    kind: 'aphorism',
+    text: 'Be the friend you needed at twenty-two.',
+    themes: ['kindness', 'self'],
+  },
+  {
+    id: 'ed-night-sky',
+    kind: 'aphorism',
+    text: 'The night sky was always going to win an argument about scale.',
+    emoji: '🌙',
+    themes: ['perspective', 'wonder'],
+  },
+  {
+    id: 'ed-keep-some',
+    kind: 'aphorism',
+    text: 'Keep some of it for yourself.',
+    emoji: '⭐',
+    themes: ['boundaries', 'self'],
+  },
+  {
+    id: 'ed-made-today',
+    kind: 'aphorism',
+    text: 'Made today, slightly better, on purpose.',
+    themes: ['craft', 'progress'],
+  },
+  {
+    id: 'ed-curious-kind',
+    kind: 'aphorism',
+    text: 'Stay curious. Stay kind. Repeat.',
+    emoji: '🌿',
+    themes: ['kindness', 'curiosity'],
+  },
+  {
+    id: 'ed-not-late',
+    kind: 'aphorism',
+    text: 'You are not late. The good things are still being assembled.',
+    themes: ['patience', 'hope'],
+  },
+  {
+    id: 'ed-borrow-faith',
+    kind: 'aphorism',
+    text: 'Some days you borrow your own faith from yesterday.',
+    themes: ['resilience', 'patience'],
+  },
+  {
+    id: 'ed-laughing',
+    kind: 'aphorism',
+    text: 'The future has been quietly laughing about this for a while.',
+    emoji: '🌅',
+    themes: ['perspective', 'wit'],
+  },
+  {
+    id: 'ed-private-okay',
+    kind: 'aphorism',
+    text: 'Privately okay is also a kind of winning.',
+    themes: ['self', 'permission'],
+  },
+];
+
+export const quoteById = (id: string) => QUOTES.find((q) => q.id === id);
