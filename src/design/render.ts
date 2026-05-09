@@ -13,9 +13,11 @@ import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { MinimalSerifTemplate } from './templates/minimal-serif';
+import { MinimalSerifTemplate, type Theme } from './templates/minimal-serif';
 import type { Quote } from '@/content/quotes';
 import type { Figure } from '@/content/figures';
+
+export type { Theme };
 
 type Weight = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 type FontEntry = {
@@ -65,6 +67,9 @@ export type RenderOptions = {
   figure: Figure | null;
   width: number;
   height: number;
+  theme: Theme;
+  /** Override background. Defaults to transparent for print files. */
+  background?: string;
 };
 
 export async function renderDesignToPng(opts: RenderOptions): Promise<Buffer> {
@@ -76,13 +81,13 @@ export async function renderDesignToPng(opts: RenderOptions): Promise<Buffer> {
       figure: opts.figure,
       width: opts.width,
       height: opts.height,
+      theme: opts.theme,
+      background: opts.background,
     }),
     {
       width: opts.width,
       height: opts.height,
       fonts: fonts.map((f) => ({ name: f.name, data: f.data, weight: f.weight, style: f.style })),
-      // Use Twemoji for consistent emoji rendering across OSes — non-negotiable
-      // for a brand named EMOJI DUST.
       loadAdditionalAsset: async (code, segment) => {
         if (code === 'emoji') return await loadTwemoji(segment);
         return segment;
@@ -92,6 +97,7 @@ export async function renderDesignToPng(opts: RenderOptions): Promise<Buffer> {
 
   const resvg = new Resvg(svg, {
     fitTo: { mode: 'width', value: opts.width },
+    background: opts.background ?? 'rgba(0,0,0,0)',
   });
   return resvg.render().asPng();
 }

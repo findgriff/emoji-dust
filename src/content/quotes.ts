@@ -41,6 +41,7 @@ export const QUOTES: Quote[] = [
     text: 'You have power over your mind — not outside events. Realise this, and you will find strength.',
     source_work: 'Meditations',
     source_year: 170,
+    emoji: '🧠',
     themes: ['mind', 'control', 'stoicism'],
   },
   {
@@ -60,6 +61,7 @@ export const QUOTES: Quote[] = [
     text: 'We suffer more often in imagination than in reality.',
     source_work: 'Letters to Lucilius',
     source_year: 65,
+    emoji: '🌫️',
     themes: ['mind', 'anxiety', 'stoicism'],
   },
   {
@@ -79,6 +81,7 @@ export const QUOTES: Quote[] = [
     text: 'It is not what happens to you, but how you react to it that matters.',
     source_work: 'Discourses',
     source_year: 108,
+    emoji: '🪞',
     themes: ['response', 'mind', 'stoicism'],
   },
   {
@@ -88,6 +91,7 @@ export const QUOTES: Quote[] = [
     text: 'Wealth consists not in having great possessions, but in having few wants.',
     source_work: 'Discourses',
     source_year: 108,
+    emoji: '🪶',
     themes: ['minimalism', 'wealth', 'stoicism'],
   },
   {
@@ -116,6 +120,7 @@ export const QUOTES: Quote[] = [
     text: 'When I let go of what I am, I become what I might be.',
     source_work: 'Tao Te Ching',
     source_year: -500,
+    emoji: '🦋',
     themes: ['change', 'identity', 'taoism'],
   },
   {
@@ -125,6 +130,7 @@ export const QUOTES: Quote[] = [
     text: 'Our greatest glory is not in never falling, but in rising every time we fall.',
     source_work: 'Analects',
     source_year: -450,
+    emoji: '🌄',
     themes: ['resilience', 'perseverance'],
   },
   {
@@ -134,6 +140,7 @@ export const QUOTES: Quote[] = [
     text: 'We are what we repeatedly do. Excellence, then, is not an act, but a habit.',
     source_work: 'Nicomachean Ethics',
     source_year: -340,
+    emoji: '🔁',
     themes: ['habit', 'work', 'craft'],
   },
   {
@@ -143,6 +150,7 @@ export const QUOTES: Quote[] = [
     text: 'The beginning is the most important part of the work.',
     source_work: 'The Republic',
     source_year: -375,
+    emoji: '🪴',
     themes: ['beginning', 'work'],
   },
   {
@@ -151,6 +159,7 @@ export const QUOTES: Quote[] = [
     figure_slug: 'socrates',
     text: 'The unexamined life is not worth living.',
     source_year: -399,
+    emoji: '🔍',
     themes: ['mind', 'philosophy', 'self'],
   },
 
@@ -178,6 +187,7 @@ export const QUOTES: Quote[] = [
     kind: 'attributed',
     figure_slug: 'mark-twain',
     text: 'Twenty years from now you will be more disappointed by the things you didn\'t do than by the ones you did.',
+    emoji: '⛵',
     themes: ['action', 'regret', 'courage'],
   },
   {
@@ -185,6 +195,7 @@ export const QUOTES: Quote[] = [
     kind: 'attributed',
     figure_slug: 'mark-twain',
     text: 'The two most important days in your life are the day you are born and the day you find out why.',
+    emoji: '🎯',
     themes: ['purpose', 'meaning'],
   },
   {
@@ -202,6 +213,7 @@ export const QUOTES: Quote[] = [
     kind: 'attributed',
     figure_slug: 'henry-david-thoreau',
     text: 'It is not what you look at that matters, it is what you see.',
+    emoji: '👁️',
     themes: ['perception', 'attention'],
   },
   {
@@ -217,6 +229,7 @@ export const QUOTES: Quote[] = [
     kind: 'attributed',
     figure_slug: 'ralph-waldo-emerson',
     text: 'What you do speaks so loudly I cannot hear what you say.',
+    emoji: '🤲',
     themes: ['action', 'integrity'],
   },
   {
@@ -234,6 +247,7 @@ export const QUOTES: Quote[] = [
     text: 'He who has a why to live for can bear almost any how.',
     source_work: 'Twilight of the Idols',
     source_year: 1889,
+    emoji: '🌌',
     themes: ['purpose', 'resilience'],
   },
   {
@@ -249,6 +263,7 @@ export const QUOTES: Quote[] = [
     kind: 'attributed',
     figure_slug: 'leonardo-da-vinci',
     text: 'Simplicity is the ultimate sophistication.',
+    emoji: '⚪',
     themes: ['craft', 'minimalism', 'design'],
   },
   {
@@ -258,6 +273,7 @@ export const QUOTES: Quote[] = [
     text: 'To thine own self be true.',
     source_work: 'Hamlet',
     source_year: 1603,
+    emoji: '💎',
     themes: ['authenticity', 'self'],
   },
   {
@@ -273,6 +289,7 @@ export const QUOTES: Quote[] = [
     kind: 'attributed',
     figure_slug: 'einstein',
     text: 'Imagination is more important than knowledge.',
+    emoji: '🌠',
     themes: ['creativity', 'imagination'],
   },
   {
@@ -298,6 +315,7 @@ export const QUOTES: Quote[] = [
     id: 'ed-long-walk',
     kind: 'aphorism',
     text: 'Be the kind of person you would follow on a long walk.',
+    emoji: '🥾',
     themes: ['self', 'integrity'],
   },
   {
@@ -311,12 +329,14 @@ export const QUOTES: Quote[] = [
     id: 'ed-rest-accomplice',
     kind: 'aphorism',
     text: 'Rest is not the opposite of work. It is its accomplice.',
+    emoji: '🫖',
     themes: ['rest', 'work'],
   },
   {
     id: 'ed-mid-arrival',
     kind: 'aphorism',
     text: 'You are not behind. You are exactly mid-arrival.',
+    emoji: '🕰️',
     themes: ['patience', 'pace'],
   },
   {
@@ -330,12 +350,14 @@ export const QUOTES: Quote[] = [
     id: 'ed-dream-loud',
     kind: 'aphorism',
     text: 'Dream loud. Iterate quietly.',
+    emoji: '🛠️',
     themes: ['craft', 'work'],
   },
   {
     id: 'ed-obvious-thing',
     kind: 'aphorism',
     text: 'The world rewards the obvious thing done with care.',
+    emoji: '🪄',
     themes: ['craft', 'work'],
   },
   {
@@ -349,6 +371,7 @@ export const QUOTES: Quote[] = [
     id: 'ed-start-tuesday',
     kind: 'aphorism',
     text: 'You are allowed to start a Tuesday.',
+    emoji: '🗓️',
     themes: ['beginning', 'permission'],
   },
   {
@@ -362,6 +385,7 @@ export const QUOTES: Quote[] = [
     id: 'ed-friend-22',
     kind: 'aphorism',
     text: 'Be the friend you needed at twenty-two.',
+    emoji: '💌',
     themes: ['kindness', 'self'],
   },
   {
@@ -382,6 +406,7 @@ export const QUOTES: Quote[] = [
     id: 'ed-made-today',
     kind: 'aphorism',
     text: 'Made today, slightly better, on purpose.',
+    emoji: '🧶',
     themes: ['craft', 'progress'],
   },
   {
@@ -395,12 +420,14 @@ export const QUOTES: Quote[] = [
     id: 'ed-not-late',
     kind: 'aphorism',
     text: 'You are not late. The good things are still being assembled.',
+    emoji: '🕊️',
     themes: ['patience', 'hope'],
   },
   {
     id: 'ed-borrow-faith',
     kind: 'aphorism',
     text: 'Some days you borrow your own faith from yesterday.',
+    emoji: '🕯️',
     themes: ['resilience', 'patience'],
   },
   {
@@ -414,6 +441,7 @@ export const QUOTES: Quote[] = [
     id: 'ed-private-okay',
     kind: 'aphorism',
     text: 'Privately okay is also a kind of winning.',
+    emoji: '🌷',
     themes: ['self', 'permission'],
   },
 ];

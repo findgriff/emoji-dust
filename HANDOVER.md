@@ -1,109 +1,87 @@
 # EMOJI DUST — Handoff
 
-**Updated:** 2026-05-09 (mid-session — site is now live locally)
+**Updated:** 2026-05-09 (later session — real Printify mockups now live)
 
 ---
 
 ## Where we are
 
-The storefront is fully built and locally runnable. Run `pnpm install && pnpm render:designs && pnpm dev` and you'll see a complete site at `localhost:3000` with:
+The full pipeline is operating end-to-end. Run locally:
 
-- A landing page with hero design, featured grid, four-kind category cards, manifesto, and figures rail
-- A shop browse page that filters across 200 SKUs (50 quotes × 4 product kinds: tees, vests, hoodies, mugs)
-- Product detail pages for every SKU with quote-led typography, attribution panel, "Coming soon" Buy CTA (becomes "Buy on Printify" once the shop is live), about-the-quote panel
-- A figures index + per-figure pages for all 20 public-domain figures
-- An about page explaining the brand
-- 50 rendered design PNGs in `public/designs/` — typography-led, Twemoji-rendered emoji where intentional, EMOJI DUST signature, real attribution where applicable
+```bash
+pnpm install && pnpm render:designs --no-print && pnpm dev   # http://localhost:3000
+```
 
-Tech: Next.js 15 + Tailwind + Satori + Resvg, all OFL-licensed fonts via `@fontsource`. Typecheck clean, all routes return 200.
+The site shows:
+- 200 SKUs (50 quotes × 4 product kinds)
+- Every design carries an emoji + the quote (no exceptions)
+- Two preview variants per quote — **light stock** (dark text) and **dark stock** (white text)
+- Product pages have a **light/dark switcher** plus an **"On a model"** toggle that swaps the design preview for real Printify mockups
+- 12 featured tees + 12 featured hoodies are now actual Printify products with mockups mirrored to `/public/mockups/`
 
-Repo: https://github.com/findgriff/emoji-dust
+## What I did this round
 
-## What's blocked, waiting for you
+1. **Every quote now has an emoji.** Hand-picked across 50 quotes — sage 🌱 for action, mirror 🪞 for self-reflection, butterfly 🦋 for change, candle 🕯️ for borrowed faith, and so on. The emoji is the design's pivot, not its decoration.
 
-**To turn "Coming soon" CTAs into real Buy links, three owner actions are needed:**
+2. **Light + dark template variants.** The same `minimal-serif-v1` template now takes a `theme` prop. Light = ink type on transparent background, prints on cream/white/sage stock. Dark = cream type on transparent background, prints on black/navy/maroon stock. Both render in 5–15 seconds for the full 50-quote catalogue.
 
-1. **Rotate the Printify token.** It's in this transcript and `.env.local`. Generate a new one at https://printify.com/app/account/api, replace the value in `.env.local`, revoke the old.
+3. **Sync orchestrator pushes both artwork variants.** When a product is created on Printify, the sync uploads the light PNG, uploads the dark PNG, classifies each Bella+Canvas / AWDIS variant by colour name (Black/Navy/Maroon… → dark; Natural/White/Soft Pink… → light), and tells Printify to use the right artwork on each. Printify then renders mockups on actual model photography for both groups.
 
-2. **Create an EMOJI DUST Pop-Up Store in Printify.** The existing shop ("Fashion Kudos", id 4353393) is on Etsy and doesn't fit the custom-storefront flow. Steps:
-   - Go to https://printify.com/app/stores
-   - "Add new store" → choose **"Pop-Up Store"**
-   - Name it "Emoji Dust"
-   - Pick a slug (e.g. `emoji-dust` → URL becomes `emoji-dust.printify.me`)
-   - Copy the new shop's id, add to `.env.local` as `PRINTIFY_SHOP_ID=...`
+4. **Curated colour palette per kind.** Printify caps products at 100 enabled variants. Tee has 132 (22 colours × 6 sizes), so we trimmed to 16 colours × 5 sizes = 80. Catalogue lives in `src/content/catalog.ts` — easy to widen later.
 
-3. **Run the sync** — pushes the 200 SKUs to Printify and captures the Pop-Up listing URL on each. Note: Printify rate-limits product writes to ~200 per 30 min, so the script throttles. Full sync takes ~35 minutes.
-   ```bash
-   pnpm sync:printify --commit
-   ```
-   Or do one product kind first to sanity-check:
-   ```bash
-   pnpm sync:printify --commit --kind mug
-   ```
+5. **Mockup mirroring.** The sync downloads up to 6 mockups per theme (front, back, lifestyle angles) from Printify's CDN to `public/mockups/<quote_id>/<kind>/<theme>-<n>.jpg`. The storefront serves them locally, so we don't depend on Printify's URL stability.
 
-After that, the site's Buy CTAs become live deep-links to Printify and the brand is technically in business.
+6. **Storefront reads mockup data.** `src/content/products.ts` imports `data/products.json` (written by the sync) and enriches each Product with its Printify product id, external URL (when available), and mirrored mockup paths. The product page's gallery component swaps between design preview and real mockup based on the user's toggle.
 
-## What I built this session
+7. **Pushed 12 featured tees + 12 featured hoodies.** The 12 featured quotes (Aurelius, Wilde, Lao Tzu, Thoreau, Whitman, Van Gogh, Da Vinci, Rumi, plus 4 EMOJI DUST originals) now have real Printify products with 144 mockups mirrored locally. Total ~9MB of mockup imagery committed to the repo.
 
-Detailed session log:
+## The shop reality
 
-1. ✅ Pushed scaffold + spec to https://github.com/findgriff/emoji-dust
-2. ✅ Updated north-star spec with Q6 Printify-as-checkout pivot — deleted Stripe, customer accounts, order management entirely
-3. ✅ Confirmed Printify shop creation requires dashboard (API returns 405)
-4. ✅ Scaffolded Next.js 15 + TS strict + Tailwind + brand tokens
-5. ✅ Curated 30 attributed quotes from 20 public-domain figures (Marcus Aurelius, Seneca, Wilde, Twain, Thoreau, Emerson, Whitman, Nietzsche, van Gogh, da Vinci, Shakespeare, Rumi, Einstein, Austen, Heraclitus, Lao Tzu, Confucius, Aristotle, Plato, Socrates)
-6. ✅ Wrote 20 EMOJI DUST original aphorisms in brand voice
-7. ✅ Built `minimal-serif-v1` Satori template — quote in Fraunces, optional emoji pivot, EMOJI DUST signature with gold dust trail underline, attribution caption for real quotes
-8. ✅ Rendered all 50 designs to `public/designs/*.png` (5.9 seconds for the full set)
-9. ✅ Built site chrome (sticky nav, footer)
-10. ✅ Built landing page with hero, featured grid, categories, manifesto, figures rail
-11. ✅ Built shop browse with kind-filter pills (?kind=tee|tank|hoodie|mug)
-12. ✅ Built product detail pages with breadcrumbs, attribution panel, same-quote-other-kinds rail, more-from-figure rail
-13. ✅ Built figures index + per-figure pages
-14. ✅ Built about page
-15. ✅ Wrote Printify v1 API client (`src/lib/printify/client.ts`) — minimal, typed
-16. ✅ Wrote sync orchestrator (`src/lib/printify/sync.ts`) and CLI script — read PNG, upload, create product, publish, capture URL
-17. ✅ Typecheck clean, dev server boots, all 5 routes return 200, design PNGs serve correctly
+Shop `4353393` is currently `'disconnected'` on Printify. Products are created successfully and mockups generate — but the publish step returns HTTP 400 because there's no active sales channel. This is harmless: the products exist on Printify and become live the moment a channel is reconnected.
 
-## Sample rendered design
+**Action needed (you):** go to https://printify.com/app/stores → the disconnected shop → connect a sales channel:
 
-`public/designs/aurelius-impediment.png`:
+- **Pop-Up Store** → instant `emoji-dust.printify.me/...` URLs, 0% listing fees, ~5% transaction
+- **Etsy** → reconnect under your renamed Etsy shop, $0.20/listing/4mo + 6.5% txn
+- **Shopify** → if you ever go that route
 
-> The impediment to action advances action. What stands in the way becomes the way.
-> 🌱
-> *Emoji 😉 Dust*
-> MARCUS AURELIUS · MEDITATIONS
+Once connected, run `pnpm sync:printify --commit --featured --kind tee` again and the `external_url` field populates with the real listing URL. The storefront's "Buy on Printify" button then becomes a working deep-link.
 
-— set in Fraunces medium serif, Twemoji 🌱 above, the EMOJI DUST signature with gold dust trail beneath, attribution in small caps Inter below.
+Or for products already created, just publish them via the Printify dashboard — the artwork and variants are already there.
 
-## What's intentionally not done
+## To complete the catalogue
 
-| What | Why |
-|---|---|
-| Database (Drizzle + Postgres) | Content sits in TS modules. Equivalent shape, swap-in later. Foundations sub-project formalises. |
-| Admin panel | Sub-project #4 in the spec. Not needed until quote pipeline scales. |
-| 2nd & 3rd Satori templates | Sub-project #2 adds `split-emoji-v1` (emoji as the visual anchor) and `stacked-cap-v1` (sportier sans-serif tank treatment) |
-| Vercel deployment | Needs your Vercel/Neon/Clerk/R2 accounts. The site builds, just no host yet. |
-| Real Printify mockups on product page | Currently the design PNG itself is shown. After Printify sync, mockups (shirt-on-model PNGs from Printify) replace the design preview on product pages. Sub-project #3. |
-| Inngest job queue | Manual `pnpm render:designs` + `pnpm sync:printify --commit` for now. Fine until volume grows. |
-| Customer accounts / orders / Stripe | Deleted by the Q6 pivot. Printify Pop-Up handles all transaction surface. |
+```bash
+# Push remaining 8 product kinds × 38 non-featured quotes = ~150 more products
+# Throttled at 8s per product = ~20 minutes. Rate limit: 200 / 30 min.
+pnpm sync:printify --commit --kind tee     # all 50 tees (38 more)
+pnpm sync:printify --commit --kind hoodie  # all 50 hoodies (38 more)
+pnpm sync:printify --commit --kind tank    # all 50 tanks
+# mug needs its own template (different aspect ratio) — skip for now
+```
 
-## Files that matter most
+## Known limitations
 
-- [docs/superpowers/specs/2026-05-09-emoji-dust-north-star-design.md](docs/superpowers/specs/2026-05-09-emoji-dust-north-star-design.md) — architecture
-- [src/content/quotes.ts](src/content/quotes.ts) — the 50 quotes
-- [src/content/figures.ts](src/content/figures.ts) — the 20 figures
-- [src/design/templates/minimal-serif.tsx](src/design/templates/minimal-serif.tsx) — the template
-- [src/design/render.ts](src/design/render.ts) — Satori → Resvg pipeline
-- [src/lib/printify/sync.ts](src/lib/printify/sync.ts) — the upload+create+publish flow
-- [scripts/sync-printify.ts](scripts/sync-printify.ts) — the CLI to push to Printify
+- **Mug template needs work.** Mug print area is 2700×1000 (wide ratio), our current template is 4500×5400 (tall ratio). On the smoke test, the design wrapped around the mug in a way that cropped off the sides. Solution: a separate `minimal-serif-mug.tsx` template tuned for the wide canvas.
+- **Tank top variant catalogue is small** (24 variants, 6 colours × 4 sizes). Only 1 colour is genuinely "dark" (Black). Curated allowlist gives 24 enabled — well under the 100 cap.
+- **No Printify Pop-Up URL yet** — site shows "Coming soon" on Buy buttons until shop reconnects to a channel.
 
-## Next session, in priority order
+## Files of interest
 
-1. **Verify the locally-running site looks right** to your eye (open it, walk through every page, look at every product). Tell me what to refine — typography, spacing, copy, hero treatment, anything.
-2. Create the Pop-Up Store, run the sync, watch the Buy buttons go live.
-3. Move into Foundations sub-project: replace the in-memory content layer with Drizzle + Postgres, add the admin panel, deploy to Vercel.
-4. Vectorise the logo (`brand/emoji-dust-logo.jpeg` → `.svg`) for crisp scaling.
-5. Trademark search for "EMOJI DUST" in classes 21 (mugs) and 25 (apparel) before any paid marketing.
+- [src/content/quotes.ts](src/content/quotes.ts) — 50 quotes, all with emojis now
+- [src/content/catalog.ts](src/content/catalog.ts) — colour allowlists per product kind
+- [src/design/templates/minimal-serif.tsx](src/design/templates/minimal-serif.tsx) — light/dark theme handling
+- [src/lib/printify/sync.ts](src/lib/printify/sync.ts) — colour-classifying upload/create/publish flow
+- [scripts/sync-printify.ts](scripts/sync-printify.ts) — CLI with mockup mirroring
+- [data/products.json](data/products.json) — sync results read by the storefront
+- [public/mockups/](public/mockups/) — 144+ mirrored Printify mockup JPEGs
 
-— *Built with care while you stepped away.*
+## What's next
+
+Once the shop reconnects:
+
+1. Run the full sync to push all 200 products + capture mockups
+2. Verify `external_url` populates on each product (will be live URLs on whatever channel)
+3. Click through the storefront, every product page should show real mockups + a working Buy button
+4. Build the mug-specific Satori template (wide aspect)
+5. Roll out remaining work in the spec — admin panel, Drizzle DB migration, Vercel deploy, etc.

@@ -55,7 +55,7 @@ export default function HomePage() {
           <div className="lg:col-span-6 relative">
             <div className="relative aspect-[5/6] max-w-md mx-auto rounded-2xl overflow-hidden shadow-[0_30px_80px_-30px_rgba(26,24,23,0.3)]">
               <Image
-                src="/designs/aurelius-impediment.png"
+                src="/designs/aurelius-impediment-preview-light.png"
                 alt="The impediment to action advances action — Marcus Aurelius"
                 fill
                 priority

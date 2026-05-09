@@ -2,14 +2,26 @@
  * Materialise the storefront product list at module load:
  * for each approved quote × each product kind, generate one Product row.
  *
- * Until Printify-Pop-Up sync runs, printify_external_url is undefined and
- * the Buy CTA on the product page falls back to "Coming soon."
+ * If data/products.json exists (after a sync run), enrich each Product with
+ * the corresponding Printify product id, external URL, and mirrored mockups.
  */
 import { CATALOG, type Product, type ProductKind, productSlug } from './catalog';
 import { QUOTES } from './quotes';
 import { figureBySlug } from './figures';
+import productsData from '../../data/products.json' with { type: 'json' };
 
 const KINDS: ProductKind[] = ['tee', 'tank', 'hoodie', 'mug'];
+
+type Mapping = {
+  slug: string;
+  printify_product_id: string;
+  external_url: string | null;
+  mockups: { light: string[]; dark: string[] };
+};
+
+const MAPPINGS = new Map<string, Mapping>(
+  (productsData as Mapping[]).map((m) => [m.slug, m])
+);
 
 function titleFor(quote_id: string, kind: ProductKind): string {
   const q = QUOTES.find((x) => x.id === quote_id)!;
@@ -20,14 +32,27 @@ function titleFor(quote_id: string, kind: ProductKind): string {
 }
 
 export const PRODUCTS: Product[] = QUOTES.flatMap((q) =>
-  KINDS.map<Product>((kind) => ({
-    slug: productSlug(q.id, kind),
-    quote_id: q.id,
-    kind,
-    title: titleFor(q.id, kind),
-    retail_pence: CATALOG[kind].retail_pence,
-    artwork_path: `/designs/${q.id}.png`,
-  }))
+  KINDS.map<Product>((kind) => {
+    const slug = productSlug(q.id, kind);
+    const m = MAPPINGS.get(slug);
+    return {
+      slug,
+      quote_id: q.id,
+      kind,
+      title: titleFor(q.id, kind),
+      retail_pence: CATALOG[kind].retail_pence,
+      artwork_light_preview: `/designs/${q.id}-preview-light.png`,
+      artwork_dark_preview: `/designs/${q.id}-preview-dark.png`,
+      printify_product_id: m?.printify_product_id,
+      printify_external_url: m?.external_url ?? undefined,
+      mockups: m
+        ? {
+            light: m.mockups.light.map((url, i) => ({ url, position: i === 0 ? 'front' : 'lifestyle' })),
+            dark: m.mockups.dark.map((url, i) => ({ url, position: i === 0 ? 'front' : 'lifestyle' })),
+          }
+        : undefined,
+    };
+  })
 );
 
 export const productBySlug = (slug: string) => PRODUCTS.find((p) => p.slug === slug);

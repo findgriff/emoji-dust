@@ -1,11 +1,11 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
 import { PRODUCTS, productBySlug } from '@/content/products';
 import { CATALOG, formatPrice, type ProductKind } from '@/content/catalog';
 import { quoteById } from '@/content/quotes';
 import { figureBySlug } from '@/content/figures';
 import { ProductCard } from '@/components/product-card';
+import { ProductGallery } from '@/components/product-gallery';
 
 type Params = Promise<{ slug: string }>;
 
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Params }) {
     title: figure ? `${figure.name} — ${CATALOG[product.kind].hero_label}` : `${CATALOG[product.kind].hero_label}`,
     description: quote?.text,
     openGraph: {
-      images: [{ url: product.artwork_path, width: 1200, height: 1440 }],
+      images: [{ url: product.artwork_light_preview, width: 1200, height: 1440 }],
     },
   };
 }
@@ -65,20 +65,8 @@ export default async function ProductPage({ params }: { params: Params }) {
       </div>
 
       <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
-        {/* artwork */}
-        <div className="relative aspect-[5/6] rounded-2xl overflow-hidden bg-cream-deep/60 border border-ink/5 lg:sticky lg:top-24">
-          <Image
-            src={product.artwork_path}
-            alt={`${quote.text}${figure ? ' — ' + figure.name : ''}`}
-            fill
-            priority
-            className="object-cover"
-            sizes="(max-width: 1024px) 100vw, 600px"
-          />
-          <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-cream/90 text-[11px] font-medium tracking-widest uppercase text-ink/70 border border-ink/5">
-            Design preview
-          </div>
-        </div>
+        {/* artwork — interactive gallery with light/dark switcher + mockups */}
+        <ProductGallery product={product} />
 
         {/* details */}
         <div className="lg:pt-2">

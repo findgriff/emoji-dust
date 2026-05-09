@@ -34,3 +34,16 @@ pnpm-debug.log*
 # scratch / probes
 scripts/_probe-out/
 *.probe.json
+
+# rendered print-size PNGs (huge, regenerated on demand at sync time)
+public/designs/*-light.png
+public/designs/*-dark.png
+!public/designs/*-preview-light.png
+!public/designs/*-preview-dark.png
+
+# mockups mirrored from Printify
+public/mockups/
+
+# Printify sync intermediates — but commit the canonical mapping
+data/
+!data/products.json

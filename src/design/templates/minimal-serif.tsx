@@ -1,39 +1,64 @@
 /**
  * Template: minimal-serif-v1
  *
- * Composition:
- *   - Quote in serif, centred, generous whitespace
- *   - Optional emoji as a single visual pivot, sized as a counter-anchor to the type
- *   - EMOJI DUST signature beneath
- *   - Real attribution caption below signature (only for kind='attributed')
+ * Two themes share this template:
+ *   - 'light': dark ink type on transparent background → printed on light shirts (cream, white, natural, etc.)
+ *   - 'dark':  cream type on transparent background → printed on dark shirts (black, navy, burgundy, etc.)
  *
- * Render target: 4500×5400px @ 300dpi for tee/tank/hoodie front print area.
- *                Mug uses a 2700×1050 wrap canvas via a separate template.
+ * Background is transparent in both cases so the shirt colour shows through
+ * the design's whitespace — no rectangular ink blob on the print.
  *
- * This file returns a JSX tree that Satori knows how to convert to SVG.
- * No client-side React — pure render-time tree.
+ * For storefront preview tiles (where we want a visible background), we
+ * render onto a coloured background tile separately at the page level.
+ *
+ * Render targets:
+ *  - apparel print: 4500×5400 @ 300dpi
+ *  - mug wrap:      2700×1050 (handled by separate template — TODO)
+ *  - storefront:    1200×1440 preview (transparent — page wraps in coloured frame)
  */
 
 import * as React from 'react';
 import type { Quote } from '@/content/quotes';
 import type { Figure } from '@/content/figures';
 
-const INK = '#1A1817';
-const CREAM = '#F8F4EC';
-const GOLD = '#C8901F';
-const MUTED = '#7A736C';
+const COLOURS = {
+  light: {
+    text: '#1A1817',
+    accent: '#C8901F',
+    muted: '#7A736C',
+    underlineGradient: '#C8901F',
+  },
+  dark: {
+    text: '#F8F4EC',
+    accent: '#FFD86B',
+    muted: '#C8C0B6',
+    underlineGradient: '#FFD86B',
+  },
+} as const;
+
+export type Theme = 'light' | 'dark';
 
 export type MinimalSerifProps = {
   quote: Quote;
   figure: Figure | null;
   width: number;
   height: number;
+  theme: Theme;
+  /** Background colour for the rendered tile. 'transparent' for print files. */
+  background?: string;
 };
 
-export function MinimalSerifTemplate({ quote, figure, width, height }: MinimalSerifProps) {
+export function MinimalSerifTemplate({
+  quote,
+  figure,
+  width,
+  height,
+  theme,
+  background = 'transparent',
+}: MinimalSerifProps) {
   const isAphorism = quote.kind === 'aphorism';
+  const c = COLOURS[theme];
 
-  // Type scale: longer quotes need smaller text, but we never go below a floor.
   const charCount = quote.text.length;
   const baseSize = width * 0.072;
   const scale =
@@ -45,7 +70,7 @@ export function MinimalSerifTemplate({ quote, figure, width, height }: MinimalSe
       style={{
         width,
         height,
-        background: CREAM,
+        background,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -69,7 +94,7 @@ export function MinimalSerifTemplate({ quote, figure, width, height }: MinimalSe
       <div
         style={{
           fontSize: quoteFontSize,
-          color: INK,
+          color: c.text,
           textAlign: 'center',
           lineHeight: 1.18,
           letterSpacing: '-0.02em',
@@ -96,22 +121,21 @@ export function MinimalSerifTemplate({ quote, figure, width, height }: MinimalSe
             gap: width * 0.012,
             fontFamily: 'Pacifico',
             fontSize: width * 0.038,
-            color: INK,
+            color: c.text,
             letterSpacing: '0.01em',
           }}
         >
           <span>Emoji</span>
           <span style={{ fontSize: width * 0.05, lineHeight: 1 }}>😉</span>
-          <span style={{ color: GOLD }}>Dust</span>
+          <span style={{ color: c.accent }}>Dust</span>
         </div>
 
-        {/* gold dust trail underline */}
         <div
           style={{
             marginTop: width * 0.008,
             width: width * 0.16,
             height: width * 0.006,
-            background: `linear-gradient(90deg, transparent 0%, ${GOLD} 30%, ${GOLD} 70%, transparent 100%)`,
+            background: `linear-gradient(90deg, transparent 0%, ${c.underlineGradient} 30%, ${c.underlineGradient} 70%, transparent 100%)`,
             borderRadius: 999,
           }}
         />
@@ -122,7 +146,7 @@ export function MinimalSerifTemplate({ quote, figure, width, height }: MinimalSe
               marginTop: width * 0.02,
               fontFamily: 'Inter',
               fontSize: width * 0.018,
-              color: MUTED,
+              color: c.muted,
               letterSpacing: '0.18em',
               textTransform: 'uppercase',
               textAlign: 'center',
