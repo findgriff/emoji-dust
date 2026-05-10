@@ -25,9 +25,10 @@ export type MockupTheme = 'light' | 'dark';
  */
 export function categorizeCamera(label: string): MockupCategory {
   const l = label.toLowerCase();
-  if (/^(person|model|lifestyle|scene|outdoor|urban|wearing)/i.test(l)) return 'on_model';
+  // on-body / lifestyle: person-N / model-N for apparel; context-N for mugs (mug-in-context = held mug)
+  if (/^(person|model|lifestyle|scene|outdoor|urban|wearing|context|mood|duo)/i.test(l)) return 'on_model';
   if (/^back/i.test(l)) return 'flat_back';
-  if (/folded|hanging|detail|close|zoom/i.test(l)) return 'detail';
+  if (/folded|hanging|detail|close|zoom|angled|size-chart/i.test(l)) return 'detail';
   return 'flat_front';
 }
 
@@ -38,19 +39,19 @@ export function categorizeCamera(label: string): MockupCategory {
  */
 const HERO_COLOURS: Record<ProductKind, { light: string[]; dark: string[] }> = {
   tee: {
-    light: ['Natural', 'White'],
-    dark: ['Black', 'Navy'],
+    light: ['Natural', 'White', 'Soft Pink', 'Athletic Heather'],
+    dark: [],  // tees are light-only at MVP
   },
   tank: {
     light: ['White', 'Athletic Heather'],
-    dark: ['Black', 'Navy'],
+    dark: [],
   },
   hoodie: {
     light: ['Arctic White', 'Heather Grey'],
     dark: ['Jet Black', 'Oxford Navy'],
   },
   mug: {
-    light: [], // mug only has white
+    light: [],  // mug has no colour variants — empty allowlist => accept all
     dark: [],
   },
 };

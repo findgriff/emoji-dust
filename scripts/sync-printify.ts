@@ -21,13 +21,15 @@
 import { writeFile, mkdir, readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { URL as NodeURL } from 'node:url';
 import { PRODUCTS } from '../src/content/products';
 import { FEATURED_QUOTE_IDS } from '../src/content/products';
 import { syncProductToPrintify, type SyncResult } from '../src/lib/printify/sync';
 import { printify } from '../src/lib/printify/client';
+import { categorizeCamera, type MockupCategory } from '../src/lib/printify/mockups';
 
-const MAX_MOCKUPS_PER_THEME = 6; // we don't need 264 — keep 6 (front, back, lifestyle×4)
-const THROTTLE_MS = 8000;        // Printify allows 200 product writes / 30 min ≈ 9s spacing
+const MAX_PER_CATEGORY = 6;       // up to 6 shots per (category, theme)
+const THROTTLE_MS = 8000;         // Printify allows 200 product writes / 30 min ≈ 9s spacing
 
 async function mirrorMockup(quote_id: string, kind: string, theme: string, idx: number, url: string): Promise<string> {
   const dir = join(process.cwd(), 'public', 'mockups', quote_id, kind);
@@ -40,11 +42,21 @@ async function mirrorMockup(quote_id: string, kind: string, theme: string, idx: 
   return `/mockups/${quote_id}/${kind}/${fileName}`;
 }
 
+type CategorizedMockups = {
+  on_model: string[];
+  flat_front: string[];
+  flat_back: string[];
+  detail: string[];
+};
+
 type StorefrontProduct = {
   slug: string;
   printify_product_id: string;
   external_url: string | null;
-  mockups: { light: string[]; dark: string[] };
+  /** New shape — categorized */
+  mockups_v2?: { light: CategorizedMockups; dark: CategorizedMockups };
+  /** Legacy — kept for backward compat */
+  mockups?: { light: string[]; dark: string[] };
 };
 
 async function loadExistingMappings(): Promise<Record<string, StorefrontProduct>> {
@@ -114,35 +126,60 @@ async function main() {
     try {
       const result: SyncResult = await syncProductToPrintify(p, shopId);
 
-      // Mirror up to MAX_MOCKUPS_PER_THEME mockups per theme to disk
-      const lightMirrored: string[] = [];
-      const darkMirrored: string[] = [];
+      // Categorize each create-response mockup BEFORE Printify garbage-collects
+      // the non-default ones (Printify keeps ~16 of 132 long-term — model shots
+      // are typically pruned, so we must mirror them now).
+      const lightBuckets: CategorizedMockups = { on_model: [], flat_front: [], flat_back: [], detail: [] };
+      const darkBuckets: CategorizedMockups = { on_model: [], flat_front: [], flat_back: [], detail: [] };
       const seen = new Set<string>();
-      for (const m of result.mockups.light) {
-        if (lightMirrored.length >= MAX_MOCKUPS_PER_THEME) break;
-        if (seen.has(m.url)) continue;
-        seen.add(m.url);
-        try {
-          lightMirrored.push(await mirrorMockup(p.quote_id, p.kind, 'light', lightMirrored.length, m.url));
-        } catch (e) { /* skip individual mockup failures */ }
+
+      async function mirrorByCategory(
+        themeMockups: typeof result.mockups.light,
+        targetBuckets: CategorizedMockups,
+        theme: 'light' | 'dark',
+      ) {
+        // Sort: place on_model first so they're prioritised even if disk space tight
+        const items = themeMockups.map((m) => {
+          const cam = new NodeURL(m.url).searchParams.get('camera_label') ?? m.position ?? 'front';
+          return { ...m, camera: cam, category: categorizeCamera(cam) };
+        });
+        // Group by category
+        const byCat: Record<MockupCategory, typeof items> = {
+          on_model: [], flat_front: [], flat_back: [], detail: [],
+        };
+        for (const it of items) byCat[it.category].push(it);
+        // Mirror up to MAX_PER_CATEGORY per category
+        for (const cat of ['on_model','flat_front','flat_back','detail'] as MockupCategory[]) {
+          for (const it of byCat[cat]) {
+            if (targetBuckets[cat].length >= MAX_PER_CATEGORY) break;
+            if (seen.has(it.url)) continue;
+            seen.add(it.url);
+            try {
+              const fileName = `${theme}-${cat}-${targetBuckets[cat].length}.jpg`;
+              const dir = join(process.cwd(), 'public', 'mockups', p.quote_id, p.kind);
+              await mkdir(dir, { recursive: true });
+              const res = await fetch(it.url);
+              if (!res.ok) continue;
+              await writeFile(join(dir, fileName), Buffer.from(await res.arrayBuffer()));
+              targetBuckets[cat].push(`/mockups/${p.quote_id}/${p.kind}/${fileName}`);
+            } catch { /* skip */ }
+          }
+        }
       }
-      for (const m of result.mockups.dark) {
-        if (darkMirrored.length >= MAX_MOCKUPS_PER_THEME) break;
-        if (seen.has(m.url)) continue;
-        seen.add(m.url);
-        try {
-          darkMirrored.push(await mirrorMockup(p.quote_id, p.kind, 'dark', darkMirrored.length, m.url));
-        } catch (e) { /* skip */ }
-      }
+
+      await mirrorByCategory(result.mockups.light, lightBuckets, 'light');
+      await mirrorByCategory(result.mockups.dark, darkBuckets, 'dark');
 
       mappings[p.slug] = {
         slug: p.slug,
         printify_product_id: result.printify_product_id,
         external_url: result.external_url,
-        mockups: { light: lightMirrored, dark: darkMirrored },
+        mockups_v2: { light: lightBuckets, dark: darkBuckets },
       };
 
-      console.log(`✓ ${result.printify_product_id}  light=${lightMirrored.length} dark=${darkMirrored.length}`);
+      const ls = `light: model=${lightBuckets.on_model.length} front=${lightBuckets.flat_front.length} back=${lightBuckets.flat_back.length} detail=${lightBuckets.detail.length}`;
+      const ds = `dark: model=${darkBuckets.on_model.length} front=${darkBuckets.flat_front.length} back=${darkBuckets.flat_back.length} detail=${darkBuckets.detail.length}`;
+      console.log(`✓ ${result.printify_product_id}  ${ls}, ${ds}`);
       success++;
     } catch (err) {
       console.log(`✗ ${(err as Error).message.slice(0, 100)}`);

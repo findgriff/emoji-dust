@@ -27,8 +27,8 @@ function EditorialCard({ product, priority = false }: { product: Product; priori
     <Link href={`/p/${product.slug}`} className="lift block group">
       <div className="relative aspect-[5/6] overflow-hidden rounded-xl border border-ink/5 bg-ink">
         <Image
-          src={product.editorial_image}
-          alt={`Editorial — ${quote?.text}`}
+          src={product.artwork_dark_preview}
+          alt={`${quote?.text} — dark stock`}
           fill
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           priority={priority}
@@ -38,7 +38,7 @@ function EditorialCard({ product, priority = false }: { product: Product; priori
           {kindMeta.hero_label}
         </div>
         <div className="absolute bottom-3 right-3 px-2 py-1 rounded-full bg-ink/70 backdrop-blur text-[10px] font-medium tracking-widest uppercase text-cream/80 border border-cream/20">
-          Quote only
+          Dark stock
         </div>
       </div>
       <div className="mt-3 flex items-start justify-between gap-3">

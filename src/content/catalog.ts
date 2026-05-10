@@ -69,13 +69,15 @@ export const CATALOG: Record<ProductKind, CatalogEntry> = {
     description:
       'Soft-handed combed cotton, retail-fit, cut to last. Direct-to-garment printed in Westbury, England.',
     print_positions: ['front'],
-    supports_dark: true,
-    enabled_colours: [
-      // light stock — printed with dark artwork
-      'Natural', 'White', 'Soft Pink', 'Athletic Heather', 'Baby Blue', 'Light Blue', 'Sage', 'Silver',
-      // dark stock — printed with white artwork
-      'Black', 'Navy', 'Maroon', 'Asphalt', 'Dark Grey Heather', 'Team Purple', 'Army', 'Chocolate/Brown',
-    ],
+    // Tees are light-only at MVP. Reason: Printify's mockup studio only
+    // renders 4 angles per colour-group when a product has TWO print_areas
+    // (one for light artwork, one for dark). With a SINGLE print_area —
+    // light artwork applied uniformly across light-coloured stock — we
+    // unlock 33 mockup angles including 17 model/duo/lifestyle shots.
+    // The fashion-brand mockup variety beats having dark tee variants at
+    // this stage. Dark tees can return as a separate hero product later.
+    supports_dark: false,
+    enabled_colours: ['Natural', 'White', 'Soft Pink', 'Athletic Heather'],
     enabled_sizes: ['S', 'M', 'L', 'XL', '2XL'],
   },
   tank: {
@@ -92,8 +94,9 @@ export const CATALOG: Record<ProductKind, CatalogEntry> = {
     description:
       'Lightweight cotton-poly jersey, breathable cut. For workouts, summer, off-duty Sundays.',
     print_positions: ['front'],
-    supports_dark: true,
-    enabled_colours: ['Athletic Heather', 'White', 'Black', 'Navy', 'Red', 'True Royal'],
+    // Same trade-off as tees: light-only for full mockup variety.
+    supports_dark: false,
+    enabled_colours: ['Athletic Heather', 'White'],
     enabled_sizes: ['S', 'M', 'L', 'XL'],
   },
   hoodie: {
@@ -110,6 +113,10 @@ export const CATALOG: Record<ProductKind, CatalogEntry> = {
     description:
       'Heavyweight 280gsm brushed-back fleece, twin-needle stitched. British heritage cut, printed in England.',
     print_positions: ['front'],
+    // Hoodies keep dual stock — AWDIS blueprint's mockup studio caps at
+    // 5 angles (front, back, person-1, person-2, size-chart) regardless,
+    // so dual print_areas costs us nothing. We already get the on-model
+    // shots from this provider.
     supports_dark: true,
     enabled_colours: [
       'Arctic White', 'Heather Grey',
@@ -119,20 +126,20 @@ export const CATALOG: Record<ProductKind, CatalogEntry> = {
   },
   mug: {
     kind: 'mug',
-    blueprint_id: 441,
-    blueprint_title: 'Ceramic Mug (EU)',
-    brand: 'EMOJI DUST',
-    provider_id: 30,
-    provider_title: 'OPT OnDemand',
-    provider_country: 'CZ',
+    blueprint_id: 535,
+    blueprint_title: 'ORCA 11oz White Mug',
+    brand: 'ORCA Coatings',
+    provider_id: 6,
+    provider_title: 'T Shirt and Sons',
+    provider_country: 'GB',
     retail_pence: 1400,
     default_color: 'White',
     hero_label: 'Mug',
     description:
-      'Glossy 11oz ceramic, dishwasher and microwave safe. Printed in Prague.',
+      'Premium ORCA-coated 11oz ceramic, dishwasher and microwave safe. Dye-sublimation printed in Westbury, England.',
     print_positions: ['front'],
     supports_dark: false,
-    enabled_colours: [],
+    enabled_colours: [],  // mug only comes in white
     enabled_sizes: ['11oz'],
   },
 };

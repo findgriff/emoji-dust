@@ -14,6 +14,7 @@ import { Resvg } from '@resvg/resvg-js';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { MinimalSerifTemplate, type Theme } from './templates/minimal-serif';
+import { MinimalSerifMugTemplate } from './templates/minimal-serif-mug';
 import { MinimalQuoteTemplate } from './templates/minimal-quote';
 import type { Quote } from '@/content/quotes';
 import type { Figure } from '@/content/figures';
@@ -69,6 +70,8 @@ export type RenderOptions = {
   width: number;
   height: number;
   theme: Theme;
+  /** Layout — 'apparel' for tall canvas (tee/tank/hoodie), 'mug' for wide. */
+  layout?: 'apparel' | 'mug';
   /** Override background. Defaults to transparent for print files. */
   background?: string;
 };
@@ -76,25 +79,33 @@ export type RenderOptions = {
 export async function renderDesignToPng(opts: RenderOptions): Promise<Buffer> {
   const fonts = await loadFonts();
 
-  const svg = await satori(
-    MinimalSerifTemplate({
-      quote: opts.quote,
-      figure: opts.figure,
-      width: opts.width,
-      height: opts.height,
-      theme: opts.theme,
-      background: opts.background,
-    }),
-    {
-      width: opts.width,
-      height: opts.height,
-      fonts: fonts.map((f) => ({ name: f.name, data: f.data, weight: f.weight, style: f.style })),
-      loadAdditionalAsset: async (code, segment) => {
-        if (code === 'emoji') return await loadTwemoji(segment);
-        return segment;
-      },
-    }
-  );
+  const tree = opts.layout === 'mug'
+    ? MinimalSerifMugTemplate({
+        quote: opts.quote,
+        figure: opts.figure,
+        width: opts.width,
+        height: opts.height,
+        theme: opts.theme,
+        background: opts.background,
+      })
+    : MinimalSerifTemplate({
+        quote: opts.quote,
+        figure: opts.figure,
+        width: opts.width,
+        height: opts.height,
+        theme: opts.theme,
+        background: opts.background,
+      });
+
+  const svg = await satori(tree, {
+    width: opts.width,
+    height: opts.height,
+    fonts: fonts.map((f) => ({ name: f.name, data: f.data, weight: f.weight, style: f.style })),
+    loadAdditionalAsset: async (code, segment) => {
+      if (code === 'emoji') return await loadTwemoji(segment);
+      return segment;
+    },
+  });
 
   const resvg = new Resvg(svg, {
     fitTo: { mode: 'width', value: opts.width },

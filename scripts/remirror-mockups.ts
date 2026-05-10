@@ -29,7 +29,7 @@ import {
 } from '../src/lib/printify/mockups';
 
 const SHOP_ID = Number(process.env.PRINTIFY_SHOP_ID || '0');
-const MAX_PER_CATEGORY = 4; // up to 4 shots per (category, theme) — plenty of variety
+const MAX_PER_CATEGORY = 6; // up to 6 shots per (category, theme) — plenty of variety
 
 type Mapping = {
   slug: string;
@@ -53,6 +53,44 @@ async function downloadTo(url: string, outPath: string): Promise<number> {
   return buf.length;
 }
 
+// Cache: blueprint+provider → variant_id → colour name
+const VARIANT_COLOUR_CACHE = new Map<string, Map<number, string>>();
+
+async function fetchVariantsWithRetry(blueprintId: number, providerId: number, attempts = 5): Promise<PrintifyVariant[]> {
+  let lastErr: unknown;
+  for (let i = 0; i < attempts; i++) {
+    try {
+      const { variants } = await printify.catalog.variants(blueprintId, providerId);
+      return variants;
+    } catch (err) {
+      lastErr = err;
+      const msg = (err as Error).message;
+      if (msg.includes('429') || msg.includes('Too Many')) {
+        const backoff = 5000 * Math.pow(2, i); // 5s, 10s, 20s, 40s, 80s
+        console.warn(`    rate limited on variants ${blueprintId}/${providerId}, waiting ${backoff/1000}s…`);
+        await new Promise(r => setTimeout(r, backoff));
+        continue;
+      }
+      throw err;
+    }
+  }
+  throw lastErr;
+}
+
+async function getVariantColours(blueprintId: number, providerId: number): Promise<Map<number, string>> {
+  const key = `${blueprintId}:${providerId}`;
+  const cached = VARIANT_COLOUR_CACHE.get(key);
+  if (cached) return cached;
+  const variants = await fetchVariantsWithRetry(blueprintId, providerId);
+  const map = new Map<number, string>();
+  for (const v of variants) {
+    const colour = (v.options as any)?.color ?? '';
+    map.set(v.id, colour);
+  }
+  VARIANT_COLOUR_CACHE.set(key, map);
+  return map;
+}
+
 async function remirrorOne(slug: string, productId: string): Promise<{ light: CategorizedMockups; dark: CategorizedMockups } | null> {
   const kind = slug.split('-').pop() as ProductKind;
   const meta = CATALOG[kind];
@@ -64,7 +102,6 @@ async function remirrorOne(slug: string, productId: string): Promise<{ light: Ca
   // 1. Fetch the live product
   let product: any;
   try {
-    product = await (printify as any).products.list ? null : null;
     const res = await fetch(`https://api.printify.com/v1/shops/${SHOP_ID}/products/${productId}.json`, {
       headers: { Authorization: `Bearer ${process.env.PRINTIFY_API_TOKEN}` },
     });
@@ -78,13 +115,8 @@ async function remirrorOne(slug: string, productId: string): Promise<{ light: Ca
   const images: Array<{ src: string; variant_ids: number[]; position: string; is_default: boolean }> = product.images ?? [];
   if (images.length === 0) return null;
 
-  // 2. Look up the variant catalog so we can map variant_id → colour
-  const { variants }: { variants: PrintifyVariant[] } = await printify.catalog.variants(meta.blueprint_id, meta.provider_id);
-  const variantColour = new Map<number, string>();
-  for (const v of variants) {
-    const colour = (v.options as any)?.color ?? '';
-    variantColour.set(v.id, colour);
-  }
+  // 2. Look up cached colours for this blueprint+provider
+  const variantColour = await getVariantColours(meta.blueprint_id, meta.provider_id);
 
   // 3. For each image, derive { camera, colour }
   const enriched = images.map((img) => {
@@ -164,6 +196,24 @@ async function main() {
 
   const targets = filter ? mappings.filter((m) => m.slug === filter) : mappings;
   console.log(`Remirroring ${targets.length} product(s)…\n`);
+
+  // Pre-warm variant cache so rate-limit pain happens once, upfront
+  const seenKinds = new Set<ProductKind>();
+  for (const m of targets) {
+    const kind = m.slug.split('-').pop() as ProductKind;
+    if (seenKinds.has(kind)) continue;
+    seenKinds.add(kind);
+    const meta = CATALOG[kind];
+    if (!meta) continue;
+    process.stdout.write(`  pre-fetching variants for ${kind} (bp ${meta.blueprint_id} × pp ${meta.provider_id})… `);
+    try {
+      await getVariantColours(meta.blueprint_id, meta.provider_id);
+      console.log('cached');
+    } catch (err) {
+      console.log(`failed: ${(err as Error).message.slice(0, 100)}`);
+    }
+  }
+  console.log();
 
   let success = 0;
   let failed = 0;

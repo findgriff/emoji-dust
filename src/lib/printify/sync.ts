@@ -35,18 +35,25 @@ export async function syncProductToPrintify(product: Product, shopId: number): P
   const figure = quote.figure_slug ? figureBySlug(quote.figure_slug) : null;
   const meta = CATALOG[product.kind];
 
-  // 1. Render print-size PNGs in memory (transparent backgrounds)
-  const PRINT_SIZE = { width: 4500, height: 5400 };
+  // 1. Render print-size PNGs in memory (transparent backgrounds).
+  //    Mugs use a wide canvas + horizontal layout; apparel uses tall canvas.
+  const isMug = product.kind === 'mug';
+  const PRINT_SIZE = isMug
+    ? { width: 2582, height: 1120 }
+    : { width: 4500, height: 5400 };
+  const layout: 'apparel' | 'mug' = isMug ? 'mug' : 'apparel';
+
   const lightPng = await renderDesignToPng({
     quote,
     figure: figure ?? null,
     ...PRINT_SIZE,
     theme: 'light',
+    layout,
     background: 'transparent',
   });
 
   const lightUpload = await printify.uploads.fromBase64(
-    `${product.quote_id}-light.png`,
+    `${product.quote_id}-${product.kind}-light.png`,
     lightPng.toString('base64'),
   );
 
@@ -57,10 +64,11 @@ export async function syncProductToPrintify(product: Product, shopId: number): P
       figure: figure ?? null,
       ...PRINT_SIZE,
       theme: 'dark',
+      layout,
       background: 'transparent',
     });
     darkUpload = await printify.uploads.fromBase64(
-      `${product.quote_id}-dark.png`,
+      `${product.quote_id}-${product.kind}-dark.png`,
       darkPng.toString('base64'),
     );
   }
