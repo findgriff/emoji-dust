@@ -1,10 +1,41 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ProductCard } from '@/components/product-card';
+import { HeroEmojis } from '@/components/hero-emojis';
 import { PRODUCTS, FEATURED_QUOTE_IDS } from '@/content/products';
-import { CATALOG } from '@/content/catalog';
+import { CATALOG, type ProductKind } from '@/content/catalog';
 import { QUOTES } from '@/content/quotes';
 import { FIGURES } from '@/content/figures';
+
+/**
+ * Pick a representative hero mockup per category for the "Four ways to wear"
+ * grid. We pick a known-good (model, colour, quote) combination per kind so
+ * each card opens with a polished image. Tank has no mockups (not synced),
+ * so it falls back to the design-preview tile.
+ */
+const CATEGORY_HERO: Record<ProductKind, { src: string; alt: string; objectFit: 'cover' | 'contain' }> = {
+  tee: {
+    src: '/mockups/aurelius-impediment/tee/light-on_model-0.jpg',
+    alt: 'Tee on model — Marcus Aurelius quote',
+    objectFit: 'cover',
+  },
+  tank: {
+    // No tank mockups synced yet — use a design preview as a clean placeholder.
+    src: '/designs/whitman-sunshine-preview-light.png',
+    alt: 'Vest preview — Walt Whitman quote',
+    objectFit: 'contain',
+  },
+  hoodie: {
+    src: '/mockups/rumi-seeking/hoodie/light-on_model-0.jpg',
+    alt: 'Hoodie on model — Rumi quote',
+    objectFit: 'cover',
+  },
+  mug: {
+    src: '/mockups/rumi-seeking/mug/light-flat_front-0.jpg',
+    alt: 'Mug front — Rumi quote',
+    objectFit: 'contain',
+  },
+};
 
 export default function HomePage() {
   // Featured tees first — pulls from FEATURED_QUOTE_IDS, all tees
@@ -16,7 +47,9 @@ export default function HomePage() {
     <>
       {/* ─── Hero ─────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden">
-        <div className="mx-auto max-w-6xl px-6 pt-20 md:pt-28 pb-16 grid lg:grid-cols-12 gap-12 items-center">
+        {/* Floating emoji decoration — the dust trail */}
+        <HeroEmojis />
+        <div className="mx-auto max-w-6xl px-6 pt-20 md:pt-28 pb-16 grid lg:grid-cols-12 gap-12 items-center relative">
           <div className="lg:col-span-6 relative z-10">
             <div className="text-xs tracking-[0.3em] uppercase text-dust mb-6 font-medium">
               Wisdom · with a wink
@@ -104,15 +137,31 @@ export default function HomePage() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {(['tee', 'tank', 'hoodie', 'mug'] as const).map((kind) => {
             const meta = CATALOG[kind];
+            const hero = CATEGORY_HERO[kind];
             return (
               <Link
                 key={kind}
                 href={`/shop?kind=${kind}`}
                 className="lift group relative aspect-square rounded-xl bg-cream-deep/60 border border-ink/5 overflow-hidden flex flex-col justify-end p-6"
               >
-                <div className="font-serif text-2xl text-ink leading-none">{meta.hero_label}</div>
-                <div className="text-xs text-muted mt-1.5">From £{(meta.retail_pence / 100).toFixed(0)} · {meta.provider_country === 'GB' ? 'Printed in UK' : 'Printed in EU'}</div>
-                <div className="absolute top-5 right-5 text-xs uppercase tracking-widest text-dust opacity-0 group-hover:opacity-100 transition-opacity">
+                {/* Mockup background — model shot for apparel, flat product for mug */}
+                <Image
+                  src={hero.src}
+                  alt={hero.alt}
+                  fill
+                  sizes="(max-width: 640px) 50vw, 25vw"
+                  className={`${hero.objectFit === 'cover' ? 'object-cover' : 'object-contain p-6'} transition-transform duration-500 group-hover:scale-[1.04]`}
+                />
+                {/* Bottom gradient so the label stays legible over the mockup */}
+                <div className="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-cream/95 via-cream/70 to-transparent" />
+                <div className="relative z-10">
+                  <div className="font-serif text-2xl text-ink leading-none">{meta.hero_label}</div>
+                  <div className="text-xs text-muted mt-1.5">
+                    From £{(meta.retail_pence / 100).toFixed(0)} ·{' '}
+                    {meta.provider_country === 'GB' ? 'Printed in UK' : 'Printed in EU'}
+                  </div>
+                </div>
+                <div className="absolute top-5 right-5 z-10 text-xs uppercase tracking-widest text-dust px-2 py-1 rounded-full bg-cream/80 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
                   Browse →
                 </div>
               </Link>
