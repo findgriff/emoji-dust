@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Footer, Nav } from '@/components/site-chrome';
 import './globals.css';
 
@@ -18,6 +18,15 @@ export const metadata: Metadata = {
     type: 'website',
   },
   twitter: { card: 'summary_large_image' },
+};
+
+// Critical for mobile: without this, Safari on iPhone renders the page at
+// ~980px desktop width and zooms out, which made the product gallery image
+// (and everything else) appear as a tiny zoomed-out desktop view.
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#F8F4EC',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
