@@ -1,7 +1,7 @@
 [
   {
     "slug": "aurelius-impediment-hoodie",
-    "printify_product_id": "6a003f674ba2ff981a02ad5a",
+    "printify_product_id": "6a0053a4de847272360d9cf3",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -19,10 +19,7 @@
           "/mockups/aurelius-impediment/hoodie/light-flat_back-0.jpg",
           "/mockups/aurelius-impediment/hoodie/light-flat_back-1.jpg"
         ],
-        "detail": [
-          "/mockups/aurelius-impediment/hoodie/light-detail-0.jpg",
-          "/mockups/aurelius-impediment/hoodie/light-detail-1.jpg"
-        ]
+        "detail": []
       },
       "dark": {
         "on_model": [
@@ -49,34 +46,27 @@
           "/mockups/aurelius-impediment/hoodie/dark-flat_back-4.jpg",
           "/mockups/aurelius-impediment/hoodie/dark-flat_back-5.jpg"
         ],
-        "detail": [
-          "/mockups/aurelius-impediment/hoodie/dark-detail-0.jpg",
-          "/mockups/aurelius-impediment/hoodie/dark-detail-1.jpg",
-          "/mockups/aurelius-impediment/hoodie/dark-detail-2.jpg",
-          "/mockups/aurelius-impediment/hoodie/dark-detail-3.jpg",
-          "/mockups/aurelius-impediment/hoodie/dark-detail-4.jpg",
-          "/mockups/aurelius-impediment/hoodie/dark-detail-5.jpg"
-        ]
+        "detail": []
       }
     }
   },
   {
     "slug": "aurelius-impediment-mug",
-    "printify_product_id": "6a004551146ee39d4b0c9e28",
+    "printify_product_id": "6a005ba6146ee39d4b0cadb0",
     "external_url": null,
     "mockups_v2": {
       "light": {
         "on_model": [
-          "/mockups/aurelius-impediment/mug/light-on_model-0.jpg",
-          "/mockups/aurelius-impediment/mug/light-on_model-1.jpg"
+          "/mockups/aurelius-impediment/mug/light-on_model-0.jpg"
         ],
         "flat_front": [
-          "/mockups/aurelius-impediment/mug/light-flat_front-0.jpg",
-          "/mockups/aurelius-impediment/mug/light-flat_front-1.jpg",
-          "/mockups/aurelius-impediment/mug/light-flat_front-2.jpg"
+          "/mockups/aurelius-impediment/mug/light-flat_front-0.jpg"
         ],
         "flat_back": [],
-        "detail": []
+        "detail": [
+          "/mockups/aurelius-impediment/mug/light-detail-0.jpg",
+          "/mockups/aurelius-impediment/mug/light-detail-1.jpg"
+        ]
       },
       "dark": {
         "on_model": [],
@@ -88,7 +78,7 @@
   },
   {
     "slug": "aurelius-impediment-tee",
-    "printify_product_id": "6a003d974aa7eef0e9058ccd",
+    "printify_product_id": "6a0051e272bfa4db66050afa",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -135,7 +125,7 @@
   },
   {
     "slug": "da-vinci-simplicity-hoodie",
-    "printify_product_id": "6a004281de847272360d922c",
+    "printify_product_id": "6a0056ca4ba2ff981a02bba2",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -153,10 +143,7 @@
           "/mockups/da-vinci-simplicity/hoodie/light-flat_back-0.jpg",
           "/mockups/da-vinci-simplicity/hoodie/light-flat_back-1.jpg"
         ],
-        "detail": [
-          "/mockups/da-vinci-simplicity/hoodie/light-detail-0.jpg",
-          "/mockups/da-vinci-simplicity/hoodie/light-detail-1.jpg"
-        ]
+        "detail": []
       },
       "dark": {
         "on_model": [
@@ -183,34 +170,27 @@
           "/mockups/da-vinci-simplicity/hoodie/dark-flat_back-4.jpg",
           "/mockups/da-vinci-simplicity/hoodie/dark-flat_back-5.jpg"
         ],
-        "detail": [
-          "/mockups/da-vinci-simplicity/hoodie/dark-detail-0.jpg",
-          "/mockups/da-vinci-simplicity/hoodie/dark-detail-1.jpg",
-          "/mockups/da-vinci-simplicity/hoodie/dark-detail-2.jpg",
-          "/mockups/da-vinci-simplicity/hoodie/dark-detail-3.jpg",
-          "/mockups/da-vinci-simplicity/hoodie/dark-detail-4.jpg",
-          "/mockups/da-vinci-simplicity/hoodie/dark-detail-5.jpg"
-        ]
+        "detail": []
       }
     }
   },
   {
     "slug": "da-vinci-simplicity-mug",
-    "printify_product_id": "6a0045c94aa7eef0e90590a2",
+    "printify_product_id": "6a005c264ba2ff981a02bf74",
     "external_url": null,
     "mockups_v2": {
       "light": {
         "on_model": [
-          "/mockups/da-vinci-simplicity/mug/light-on_model-0.jpg",
-          "/mockups/da-vinci-simplicity/mug/light-on_model-1.jpg"
+          "/mockups/da-vinci-simplicity/mug/light-on_model-0.jpg"
         ],
         "flat_front": [
-          "/mockups/da-vinci-simplicity/mug/light-flat_front-0.jpg",
-          "/mockups/da-vinci-simplicity/mug/light-flat_front-1.jpg",
-          "/mockups/da-vinci-simplicity/mug/light-flat_front-2.jpg"
+          "/mockups/da-vinci-simplicity/mug/light-flat_front-0.jpg"
         ],
         "flat_back": [],
-        "detail": []
+        "detail": [
+          "/mockups/da-vinci-simplicity/mug/light-detail-0.jpg",
+          "/mockups/da-vinci-simplicity/mug/light-detail-1.jpg"
+        ]
       },
       "dark": {
         "on_model": [],
@@ -222,7 +202,7 @@
   },
   {
     "slug": "da-vinci-simplicity-tee",
-    "printify_product_id": "6a003e76f0f38ff1d504e0f2",
+    "printify_product_id": "6a0052bfae38bc3d2e09f16f",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -269,7 +249,7 @@
   },
   {
     "slug": "ed-night-sky-hoodie",
-    "printify_product_id": "6a0044bdf0f38ff1d504e3cf",
+    "printify_product_id": "6a0059784ba2ff981a02bde2",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -287,10 +267,7 @@
           "/mockups/ed-night-sky/hoodie/light-flat_back-0.jpg",
           "/mockups/ed-night-sky/hoodie/light-flat_back-1.jpg"
         ],
-        "detail": [
-          "/mockups/ed-night-sky/hoodie/light-detail-0.jpg",
-          "/mockups/ed-night-sky/hoodie/light-detail-1.jpg"
-        ]
+        "detail": []
       },
       "dark": {
         "on_model": [
@@ -317,34 +294,27 @@
           "/mockups/ed-night-sky/hoodie/dark-flat_back-4.jpg",
           "/mockups/ed-night-sky/hoodie/dark-flat_back-5.jpg"
         ],
-        "detail": [
-          "/mockups/ed-night-sky/hoodie/dark-detail-0.jpg",
-          "/mockups/ed-night-sky/hoodie/dark-detail-1.jpg",
-          "/mockups/ed-night-sky/hoodie/dark-detail-2.jpg",
-          "/mockups/ed-night-sky/hoodie/dark-detail-3.jpg",
-          "/mockups/ed-night-sky/hoodie/dark-detail-4.jpg",
-          "/mockups/ed-night-sky/hoodie/dark-detail-5.jpg"
-        ]
+        "detail": []
       }
     }
   },
   {
     "slug": "ed-night-sky-mug",
-    "printify_product_id": "6a004628de847272360d9367",
+    "printify_product_id": "6a005c914ba2ff981a02bf95",
     "external_url": null,
     "mockups_v2": {
       "light": {
         "on_model": [
-          "/mockups/ed-night-sky/mug/light-on_model-0.jpg",
-          "/mockups/ed-night-sky/mug/light-on_model-1.jpg"
+          "/mockups/ed-night-sky/mug/light-on_model-0.jpg"
         ],
         "flat_front": [
-          "/mockups/ed-night-sky/mug/light-flat_front-0.jpg",
-          "/mockups/ed-night-sky/mug/light-flat_front-1.jpg",
-          "/mockups/ed-night-sky/mug/light-flat_front-2.jpg"
+          "/mockups/ed-night-sky/mug/light-flat_front-0.jpg"
         ],
         "flat_back": [],
-        "detail": []
+        "detail": [
+          "/mockups/ed-night-sky/mug/light-detail-0.jpg",
+          "/mockups/ed-night-sky/mug/light-detail-1.jpg"
+        ]
       },
       "dark": {
         "on_model": [],
@@ -356,7 +326,7 @@
   },
   {
     "slug": "ed-night-sky-tee",
-    "printify_product_id": "6a003f314aa7eef0e9058da1",
+    "printify_product_id": "6a005371de847272360d9cd5",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -403,7 +373,7 @@
   },
   {
     "slug": "ed-plot-twist-hoodie",
-    "printify_product_id": "6a00440a72bfa4db66050155",
+    "printify_product_id": "6a005866ae38bc3d2e09f499",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -421,10 +391,7 @@
           "/mockups/ed-plot-twist/hoodie/light-flat_back-0.jpg",
           "/mockups/ed-plot-twist/hoodie/light-flat_back-1.jpg"
         ],
-        "detail": [
-          "/mockups/ed-plot-twist/hoodie/light-detail-0.jpg",
-          "/mockups/ed-plot-twist/hoodie/light-detail-1.jpg"
-        ]
+        "detail": []
       },
       "dark": {
         "on_model": [
@@ -451,34 +418,27 @@
           "/mockups/ed-plot-twist/hoodie/dark-flat_back-4.jpg",
           "/mockups/ed-plot-twist/hoodie/dark-flat_back-5.jpg"
         ],
-        "detail": [
-          "/mockups/ed-plot-twist/hoodie/dark-detail-0.jpg",
-          "/mockups/ed-plot-twist/hoodie/dark-detail-1.jpg",
-          "/mockups/ed-plot-twist/hoodie/dark-detail-2.jpg",
-          "/mockups/ed-plot-twist/hoodie/dark-detail-3.jpg",
-          "/mockups/ed-plot-twist/hoodie/dark-detail-4.jpg",
-          "/mockups/ed-plot-twist/hoodie/dark-detail-5.jpg"
-        ]
+        "detail": []
       }
     }
   },
   {
     "slug": "ed-plot-twist-mug",
-    "printify_product_id": "6a004600f0f38ff1d504e449",
+    "printify_product_id": "6a005c654aa7eef0e905a021",
     "external_url": null,
     "mockups_v2": {
       "light": {
         "on_model": [
-          "/mockups/ed-plot-twist/mug/light-on_model-0.jpg",
-          "/mockups/ed-plot-twist/mug/light-on_model-1.jpg"
+          "/mockups/ed-plot-twist/mug/light-on_model-0.jpg"
         ],
         "flat_front": [
-          "/mockups/ed-plot-twist/mug/light-flat_front-0.jpg",
-          "/mockups/ed-plot-twist/mug/light-flat_front-1.jpg",
-          "/mockups/ed-plot-twist/mug/light-flat_front-2.jpg"
+          "/mockups/ed-plot-twist/mug/light-flat_front-0.jpg"
         ],
         "flat_back": [],
-        "detail": []
+        "detail": [
+          "/mockups/ed-plot-twist/mug/light-detail-0.jpg",
+          "/mockups/ed-plot-twist/mug/light-detail-1.jpg"
+        ]
       },
       "dark": {
         "on_model": [],
@@ -490,7 +450,7 @@
   },
   {
     "slug": "ed-plot-twist-tee",
-    "printify_product_id": "6a003ee772bfa4db6604fef6",
+    "printify_product_id": "6a00532af0f38ff1d504ee11",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -537,7 +497,7 @@
   },
   {
     "slug": "ed-smallest-unit-hoodie",
-    "printify_product_id": "6a0043874aa7eef0e9058fc8",
+    "printify_product_id": "6a0057dbae38bc3d2e09f461",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -555,10 +515,7 @@
           "/mockups/ed-smallest-unit/hoodie/light-flat_back-0.jpg",
           "/mockups/ed-smallest-unit/hoodie/light-flat_back-1.jpg"
         ],
-        "detail": [
-          "/mockups/ed-smallest-unit/hoodie/light-detail-0.jpg",
-          "/mockups/ed-smallest-unit/hoodie/light-detail-1.jpg"
-        ]
+        "detail": []
       },
       "dark": {
         "on_model": [
@@ -585,34 +542,27 @@
           "/mockups/ed-smallest-unit/hoodie/dark-flat_back-4.jpg",
           "/mockups/ed-smallest-unit/hoodie/dark-flat_back-5.jpg"
         ],
-        "detail": [
-          "/mockups/ed-smallest-unit/hoodie/dark-detail-0.jpg",
-          "/mockups/ed-smallest-unit/hoodie/dark-detail-1.jpg",
-          "/mockups/ed-smallest-unit/hoodie/dark-detail-2.jpg",
-          "/mockups/ed-smallest-unit/hoodie/dark-detail-3.jpg",
-          "/mockups/ed-smallest-unit/hoodie/dark-detail-4.jpg",
-          "/mockups/ed-smallest-unit/hoodie/dark-detail-5.jpg"
-        ]
+        "detail": []
       }
     }
   },
   {
     "slug": "ed-smallest-unit-mug",
-    "printify_product_id": "6a0045edae38bc3d2e09e807",
+    "printify_product_id": "6a005c4ef0f38ff1d504f3dd",
     "external_url": null,
     "mockups_v2": {
       "light": {
         "on_model": [
-          "/mockups/ed-smallest-unit/mug/light-on_model-0.jpg",
-          "/mockups/ed-smallest-unit/mug/light-on_model-1.jpg"
+          "/mockups/ed-smallest-unit/mug/light-on_model-0.jpg"
         ],
         "flat_front": [
-          "/mockups/ed-smallest-unit/mug/light-flat_front-0.jpg",
-          "/mockups/ed-smallest-unit/mug/light-flat_front-1.jpg",
-          "/mockups/ed-smallest-unit/mug/light-flat_front-2.jpg"
+          "/mockups/ed-smallest-unit/mug/light-flat_front-0.jpg"
         ],
         "flat_back": [],
-        "detail": []
+        "detail": [
+          "/mockups/ed-smallest-unit/mug/light-detail-0.jpg",
+          "/mockups/ed-smallest-unit/mug/light-detail-1.jpg"
+        ]
       },
       "dark": {
         "on_model": [],
@@ -624,7 +574,7 @@
   },
   {
     "slug": "ed-smallest-unit-tee",
-    "printify_product_id": "6a003ec1de847272360d9055",
+    "printify_product_id": "6a005305146ee39d4b0ca83f",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -671,7 +621,7 @@
   },
   {
     "slug": "ed-soft-strategy-hoodie",
-    "printify_product_id": "6a00464e146ee39d4b0c9e8b",
+    "printify_product_id": "6a0058eef0f38ff1d504f1c0",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -689,10 +639,7 @@
           "/mockups/ed-soft-strategy/hoodie/light-flat_back-0.jpg",
           "/mockups/ed-soft-strategy/hoodie/light-flat_back-1.jpg"
         ],
-        "detail": [
-          "/mockups/ed-soft-strategy/hoodie/light-detail-0.jpg",
-          "/mockups/ed-soft-strategy/hoodie/light-detail-1.jpg"
-        ]
+        "detail": []
       },
       "dark": {
         "on_model": [
@@ -719,34 +666,27 @@
           "/mockups/ed-soft-strategy/hoodie/dark-flat_back-4.jpg",
           "/mockups/ed-soft-strategy/hoodie/dark-flat_back-5.jpg"
         ],
-        "detail": [
-          "/mockups/ed-soft-strategy/hoodie/dark-detail-0.jpg",
-          "/mockups/ed-soft-strategy/hoodie/dark-detail-1.jpg",
-          "/mockups/ed-soft-strategy/hoodie/dark-detail-2.jpg",
-          "/mockups/ed-soft-strategy/hoodie/dark-detail-3.jpg",
-          "/mockups/ed-soft-strategy/hoodie/dark-detail-4.jpg",
-          "/mockups/ed-soft-strategy/hoodie/dark-detail-5.jpg"
-        ]
+        "detail": []
       }
     }
   },
   {
     "slug": "ed-soft-strategy-mug",
-    "printify_product_id": "6a004615de847272360d935d",
+    "printify_product_id": "6a005c7bf0f38ff1d504f3e9",
     "external_url": null,
     "mockups_v2": {
       "light": {
         "on_model": [
-          "/mockups/ed-soft-strategy/mug/light-on_model-0.jpg",
-          "/mockups/ed-soft-strategy/mug/light-on_model-1.jpg"
+          "/mockups/ed-soft-strategy/mug/light-on_model-0.jpg"
         ],
         "flat_front": [
-          "/mockups/ed-soft-strategy/mug/light-flat_front-0.jpg",
-          "/mockups/ed-soft-strategy/mug/light-flat_front-1.jpg",
-          "/mockups/ed-soft-strategy/mug/light-flat_front-2.jpg"
+          "/mockups/ed-soft-strategy/mug/light-flat_front-0.jpg"
         ],
         "flat_back": [],
-        "detail": []
+        "detail": [
+          "/mockups/ed-soft-strategy/mug/light-detail-0.jpg",
+          "/mockups/ed-soft-strategy/mug/light-detail-1.jpg"
+        ]
       },
       "dark": {
         "on_model": [],
@@ -758,7 +698,7 @@
   },
   {
     "slug": "ed-soft-strategy-tee",
-    "printify_product_id": "6a003f0b146ee39d4b0c9b7a",
+    "printify_product_id": "6a00534bae38bc3d2e09f1bc",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -805,7 +745,7 @@
   },
   {
     "slug": "lao-tzu-step-hoodie",
-    "printify_product_id": "6a003fe9ae38bc3d2e09e56b",
+    "printify_product_id": "6a005428f0f38ff1d504eee3",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -823,10 +763,7 @@
           "/mockups/lao-tzu-step/hoodie/light-flat_back-0.jpg",
           "/mockups/lao-tzu-step/hoodie/light-flat_back-1.jpg"
         ],
-        "detail": [
-          "/mockups/lao-tzu-step/hoodie/light-detail-0.jpg",
-          "/mockups/lao-tzu-step/hoodie/light-detail-1.jpg"
-        ]
+        "detail": []
       },
       "dark": {
         "on_model": [
@@ -853,34 +790,27 @@
           "/mockups/lao-tzu-step/hoodie/dark-flat_back-4.jpg",
           "/mockups/lao-tzu-step/hoodie/dark-flat_back-5.jpg"
         ],
-        "detail": [
-          "/mockups/lao-tzu-step/hoodie/dark-detail-0.jpg",
-          "/mockups/lao-tzu-step/hoodie/dark-detail-1.jpg",
-          "/mockups/lao-tzu-step/hoodie/dark-detail-2.jpg",
-          "/mockups/lao-tzu-step/hoodie/dark-detail-3.jpg",
-          "/mockups/lao-tzu-step/hoodie/dark-detail-4.jpg",
-          "/mockups/lao-tzu-step/hoodie/dark-detail-5.jpg"
-        ]
+        "detail": []
       }
     }
   },
   {
     "slug": "lao-tzu-step-mug",
-    "printify_product_id": "6a004565146ee39d4b0c9e2b",
+    "printify_product_id": "6a005bbc4aa7eef0e9059fc0",
     "external_url": null,
     "mockups_v2": {
       "light": {
         "on_model": [
-          "/mockups/lao-tzu-step/mug/light-on_model-0.jpg",
-          "/mockups/lao-tzu-step/mug/light-on_model-1.jpg"
+          "/mockups/lao-tzu-step/mug/light-on_model-0.jpg"
         ],
         "flat_front": [
-          "/mockups/lao-tzu-step/mug/light-flat_front-0.jpg",
-          "/mockups/lao-tzu-step/mug/light-flat_front-1.jpg",
-          "/mockups/lao-tzu-step/mug/light-flat_front-2.jpg"
+          "/mockups/lao-tzu-step/mug/light-flat_front-0.jpg"
         ],
         "flat_back": [],
-        "detail": []
+        "detail": [
+          "/mockups/lao-tzu-step/mug/light-detail-0.jpg",
+          "/mockups/lao-tzu-step/mug/light-detail-1.jpg"
+        ]
       },
       "dark": {
         "on_model": [],
@@ -892,7 +822,7 @@
   },
   {
     "slug": "lao-tzu-step-tee",
-    "printify_product_id": "6a003dbc4aa7eef0e9058cec",
+    "printify_product_id": "6a0052074aa7eef0e905998d",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -939,7 +869,7 @@
   },
   {
     "slug": "rumi-seeking-hoodie",
-    "printify_product_id": "6a004307e2d92d25770818f7",
+    "printify_product_id": "6a0057564ba2ff981a02bc25",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -957,10 +887,7 @@
           "/mockups/rumi-seeking/hoodie/light-flat_back-0.jpg",
           "/mockups/rumi-seeking/hoodie/light-flat_back-1.jpg"
         ],
-        "detail": [
-          "/mockups/rumi-seeking/hoodie/light-detail-0.jpg",
-          "/mockups/rumi-seeking/hoodie/light-detail-1.jpg"
-        ]
+        "detail": []
       },
       "dark": {
         "on_model": [
@@ -987,34 +914,27 @@
           "/mockups/rumi-seeking/hoodie/dark-flat_back-4.jpg",
           "/mockups/rumi-seeking/hoodie/dark-flat_back-5.jpg"
         ],
-        "detail": [
-          "/mockups/rumi-seeking/hoodie/dark-detail-0.jpg",
-          "/mockups/rumi-seeking/hoodie/dark-detail-1.jpg",
-          "/mockups/rumi-seeking/hoodie/dark-detail-2.jpg",
-          "/mockups/rumi-seeking/hoodie/dark-detail-3.jpg",
-          "/mockups/rumi-seeking/hoodie/dark-detail-4.jpg",
-          "/mockups/rumi-seeking/hoodie/dark-detail-5.jpg"
-        ]
+        "detail": []
       }
     }
   },
   {
     "slug": "rumi-seeking-mug",
-    "printify_product_id": "6a0045db72bfa4db660501f2",
+    "printify_product_id": "6a005c39146ee39d4b0cae0a",
     "external_url": null,
     "mockups_v2": {
       "light": {
         "on_model": [
-          "/mockups/rumi-seeking/mug/light-on_model-0.jpg",
-          "/mockups/rumi-seeking/mug/light-on_model-1.jpg"
+          "/mockups/rumi-seeking/mug/light-on_model-0.jpg"
         ],
         "flat_front": [
-          "/mockups/rumi-seeking/mug/light-flat_front-0.jpg",
-          "/mockups/rumi-seeking/mug/light-flat_front-1.jpg",
-          "/mockups/rumi-seeking/mug/light-flat_front-2.jpg"
+          "/mockups/rumi-seeking/mug/light-flat_front-0.jpg"
         ],
         "flat_back": [],
-        "detail": []
+        "detail": [
+          "/mockups/rumi-seeking/mug/light-detail-0.jpg",
+          "/mockups/rumi-seeking/mug/light-detail-1.jpg"
+        ]
       },
       "dark": {
         "on_model": [],
@@ -1026,7 +946,7 @@
   },
   {
     "slug": "rumi-seeking-tee",
-    "printify_product_id": "6a003e9bde847272360d9042",
+    "printify_product_id": "6a0052e34aa7eef0e9059a21",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -1073,7 +993,7 @@
   },
   {
     "slug": "thoreau-direction-hoodie",
-    "printify_product_id": "6a0040f3e2d92d25770817b2",
+    "printify_product_id": "6a0055374ba2ff981a02bb01",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -1091,10 +1011,7 @@
           "/mockups/thoreau-direction/hoodie/light-flat_back-0.jpg",
           "/mockups/thoreau-direction/hoodie/light-flat_back-1.jpg"
         ],
-        "detail": [
-          "/mockups/thoreau-direction/hoodie/light-detail-0.jpg",
-          "/mockups/thoreau-direction/hoodie/light-detail-1.jpg"
-        ]
+        "detail": []
       },
       "dark": {
         "on_model": [
@@ -1121,34 +1038,27 @@
           "/mockups/thoreau-direction/hoodie/dark-flat_back-4.jpg",
           "/mockups/thoreau-direction/hoodie/dark-flat_back-5.jpg"
         ],
-        "detail": [
-          "/mockups/thoreau-direction/hoodie/dark-detail-0.jpg",
-          "/mockups/thoreau-direction/hoodie/dark-detail-1.jpg",
-          "/mockups/thoreau-direction/hoodie/dark-detail-2.jpg",
-          "/mockups/thoreau-direction/hoodie/dark-detail-3.jpg",
-          "/mockups/thoreau-direction/hoodie/dark-detail-4.jpg",
-          "/mockups/thoreau-direction/hoodie/dark-detail-5.jpg"
-        ]
+        "detail": []
       }
     }
   },
   {
     "slug": "thoreau-direction-mug",
-    "printify_product_id": "6a00458d4ba2ff981a02b017",
+    "printify_product_id": "6a005be54ba2ff981a02bf60",
     "external_url": null,
     "mockups_v2": {
       "light": {
         "on_model": [
-          "/mockups/thoreau-direction/mug/light-on_model-0.jpg",
-          "/mockups/thoreau-direction/mug/light-on_model-1.jpg"
+          "/mockups/thoreau-direction/mug/light-on_model-0.jpg"
         ],
         "flat_front": [
-          "/mockups/thoreau-direction/mug/light-flat_front-0.jpg",
-          "/mockups/thoreau-direction/mug/light-flat_front-1.jpg",
-          "/mockups/thoreau-direction/mug/light-flat_front-2.jpg"
+          "/mockups/thoreau-direction/mug/light-flat_front-0.jpg"
         ],
         "flat_back": [],
-        "detail": []
+        "detail": [
+          "/mockups/thoreau-direction/mug/light-detail-0.jpg",
+          "/mockups/thoreau-direction/mug/light-detail-1.jpg"
+        ]
       },
       "dark": {
         "on_model": [],
@@ -1160,7 +1070,7 @@
   },
   {
     "slug": "thoreau-direction-tee",
-    "printify_product_id": "6a003e064aa7eef0e9058cfe",
+    "printify_product_id": "6a005253e2d92d25770822af",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -1207,7 +1117,7 @@
   },
   {
     "slug": "van-gogh-dream-hoodie",
-    "printify_product_id": "6a0041fd146ee39d4b0c9ca9",
+    "printify_product_id": "6a0056414aa7eef0e9059be7",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -1225,10 +1135,7 @@
           "/mockups/van-gogh-dream/hoodie/light-flat_back-0.jpg",
           "/mockups/van-gogh-dream/hoodie/light-flat_back-1.jpg"
         ],
-        "detail": [
-          "/mockups/van-gogh-dream/hoodie/light-detail-0.jpg",
-          "/mockups/van-gogh-dream/hoodie/light-detail-1.jpg"
-        ]
+        "detail": []
       },
       "dark": {
         "on_model": [
@@ -1255,34 +1162,27 @@
           "/mockups/van-gogh-dream/hoodie/dark-flat_back-4.jpg",
           "/mockups/van-gogh-dream/hoodie/dark-flat_back-5.jpg"
         ],
-        "detail": [
-          "/mockups/van-gogh-dream/hoodie/dark-detail-0.jpg",
-          "/mockups/van-gogh-dream/hoodie/dark-detail-1.jpg",
-          "/mockups/van-gogh-dream/hoodie/dark-detail-2.jpg",
-          "/mockups/van-gogh-dream/hoodie/dark-detail-3.jpg",
-          "/mockups/van-gogh-dream/hoodie/dark-detail-4.jpg",
-          "/mockups/van-gogh-dream/hoodie/dark-detail-5.jpg"
-        ]
+        "detail": []
       }
     }
   },
   {
     "slug": "van-gogh-dream-mug",
-    "printify_product_id": "6a0045b44aa7eef0e905909b",
+    "printify_product_id": "6a005c1172bfa4db6605111f",
     "external_url": null,
     "mockups_v2": {
       "light": {
         "on_model": [
-          "/mockups/van-gogh-dream/mug/light-on_model-0.jpg",
-          "/mockups/van-gogh-dream/mug/light-on_model-1.jpg"
+          "/mockups/van-gogh-dream/mug/light-on_model-0.jpg"
         ],
         "flat_front": [
-          "/mockups/van-gogh-dream/mug/light-flat_front-0.jpg",
-          "/mockups/van-gogh-dream/mug/light-flat_front-1.jpg",
-          "/mockups/van-gogh-dream/mug/light-flat_front-2.jpg"
+          "/mockups/van-gogh-dream/mug/light-flat_front-0.jpg"
         ],
         "flat_back": [],
-        "detail": []
+        "detail": [
+          "/mockups/van-gogh-dream/mug/light-detail-0.jpg",
+          "/mockups/van-gogh-dream/mug/light-detail-1.jpg"
+        ]
       },
       "dark": {
         "on_model": [],
@@ -1294,7 +1194,7 @@
   },
   {
     "slug": "van-gogh-dream-tee",
-    "printify_product_id": "6a003e524aa7eef0e9058d1d",
+    "printify_product_id": "6a00529bf0f38ff1d504edc0",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -1341,7 +1241,7 @@
   },
   {
     "slug": "whitman-sunshine-hoodie",
-    "printify_product_id": "6a004177de847272360d913e",
+    "printify_product_id": "6a0055bb146ee39d4b0ca9d4",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -1359,10 +1259,7 @@
           "/mockups/whitman-sunshine/hoodie/light-flat_back-0.jpg",
           "/mockups/whitman-sunshine/hoodie/light-flat_back-1.jpg"
         ],
-        "detail": [
-          "/mockups/whitman-sunshine/hoodie/light-detail-0.jpg",
-          "/mockups/whitman-sunshine/hoodie/light-detail-1.jpg"
-        ]
+        "detail": []
       },
       "dark": {
         "on_model": [
@@ -1389,34 +1286,27 @@
           "/mockups/whitman-sunshine/hoodie/dark-flat_back-4.jpg",
           "/mockups/whitman-sunshine/hoodie/dark-flat_back-5.jpg"
         ],
-        "detail": [
-          "/mockups/whitman-sunshine/hoodie/dark-detail-0.jpg",
-          "/mockups/whitman-sunshine/hoodie/dark-detail-1.jpg",
-          "/mockups/whitman-sunshine/hoodie/dark-detail-2.jpg",
-          "/mockups/whitman-sunshine/hoodie/dark-detail-3.jpg",
-          "/mockups/whitman-sunshine/hoodie/dark-detail-4.jpg",
-          "/mockups/whitman-sunshine/hoodie/dark-detail-5.jpg"
-        ]
+        "detail": []
       }
     }
   },
   {
     "slug": "whitman-sunshine-mug",
-    "printify_product_id": "6a0045a1de847272360d934b",
+    "printify_product_id": "6a005bfce2d92d25770828e8",
     "external_url": null,
     "mockups_v2": {
       "light": {
         "on_model": [
-          "/mockups/whitman-sunshine/mug/light-on_model-0.jpg",
-          "/mockups/whitman-sunshine/mug/light-on_model-1.jpg"
+          "/mockups/whitman-sunshine/mug/light-on_model-0.jpg"
         ],
         "flat_front": [
-          "/mockups/whitman-sunshine/mug/light-flat_front-0.jpg",
-          "/mockups/whitman-sunshine/mug/light-flat_front-1.jpg",
-          "/mockups/whitman-sunshine/mug/light-flat_front-2.jpg"
+          "/mockups/whitman-sunshine/mug/light-flat_front-0.jpg"
         ],
         "flat_back": [],
-        "detail": []
+        "detail": [
+          "/mockups/whitman-sunshine/mug/light-detail-0.jpg",
+          "/mockups/whitman-sunshine/mug/light-detail-1.jpg"
+        ]
       },
       "dark": {
         "on_model": [],
@@ -1428,7 +1318,7 @@
   },
   {
     "slug": "whitman-sunshine-tee",
-    "printify_product_id": "6a003e2cde847272360d8fe0",
+    "printify_product_id": "6a005278de847272360d9c4d",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -1475,7 +1365,7 @@
   },
   {
     "slug": "wilde-stars-hoodie",
-    "printify_product_id": "6a00406ff0f38ff1d504e1d8",
+    "printify_product_id": "6a0054b1de847272360d9dc7",
     "external_url": null,
     "mockups_v2": {
       "light": {
@@ -1493,10 +1383,7 @@
           "/mockups/wilde-stars/hoodie/light-flat_back-0.jpg",
           "/mockups/wilde-stars/hoodie/light-flat_back-1.jpg"
         ],
-        "detail": [
-          "/mockups/wilde-stars/hoodie/light-detail-0.jpg",
-          "/mockups/wilde-stars/hoodie/light-detail-1.jpg"
-        ]
+        "detail": []
       },
       "dark": {
         "on_model": [
@@ -1523,34 +1410,27 @@
           "/mockups/wilde-stars/hoodie/dark-flat_back-4.jpg",
           "/mockups/wilde-stars/hoodie/dark-flat_back-5.jpg"
         ],
-        "detail": [
-          "/mockups/wilde-stars/hoodie/dark-detail-0.jpg",
-          "/mockups/wilde-stars/hoodie/dark-detail-1.jpg",
-          "/mockups/wilde-stars/hoodie/dark-detail-2.jpg",
-          "/mockups/wilde-stars/hoodie/dark-detail-3.jpg",
-          "/mockups/wilde-stars/hoodie/dark-detail-4.jpg",
-          "/mockups/wilde-stars/hoodie/dark-detail-5.jpg"
-        ]
+        "detail": []
       }
     }
   },
   {
     "slug": "wilde-stars-mug",
-    "printify_product_id": "6a004578de847272360d9329",
+    "printify_product_id": "6a005bd0ae38bc3d2e09f727",
     "external_url": null,
     "mockups_v2": {
       "light": {
         "on_model": [
-          "/mockups/wilde-stars/mug/light-on_model-0.jpg",
-          "/mockups/wilde-stars/mug/light-on_model-1.jpg"
+          "/mockups/wilde-stars/mug/light-on_model-0.jpg"
         ],
         "flat_front": [
-          "/mockups/wilde-stars/mug/light-flat_front-0.jpg",
-          "/mockups/wilde-stars/mug/light-flat_front-1.jpg",
-          "/mockups/wilde-stars/mug/light-flat_front-2.jpg"
+          "/mockups/wilde-stars/mug/light-flat_front-0.jpg"
         ],
         "flat_back": [],
-        "detail": []
+        "detail": [
+          "/mockups/wilde-stars/mug/light-detail-0.jpg",
+          "/mockups/wilde-stars/mug/light-detail-1.jpg"
+        ]
       },
       "dark": {
         "on_model": [],
@@ -1562,7 +1442,7 @@
   },
   {
     "slug": "wilde-stars-tee",
-    "printify_product_id": "6a003de1e2d92d2577081655",
+    "printify_product_id": "6a00522ee2d92d257708229b",
     "external_url": null,
     "mockups_v2": {
       "light": {

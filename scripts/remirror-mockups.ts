@@ -165,15 +165,75 @@ async function remirrorOne(slug: string, productId: string): Promise<{ light: Ca
     };
     for (const c of candidates) byCategory[c.category].push(c);
 
-    // Mirror up to MAX_PER_CATEGORY per category
+    // Hash-based interleaved (camera × colour) picking — same algorithm as
+    // sync-printify.ts. Without this, adjacent products in the catalogue
+    // get IDENTICAL first-mockups because Printify's API returns images in
+    // a stable order and naive slice(0, MAX_PER_CATEGORY) picks the same
+    // camera+colour pair every time.
+    const slugHash = (() => {
+      let h = 2166136261 >>> 0; // FNV-1a basis
+      for (let i = 0; i < slug.length; i++) {
+        h ^= slug.charCodeAt(i);
+        h = Math.imul(h, 16777619) >>> 0;
+      }
+      return h;
+    })();
+
     for (const cat of ['on_model', 'flat_front', 'flat_back', 'detail'] as MockupCategory[]) {
-      const picks = byCategory[cat].slice(0, MAX_PER_CATEGORY);
-      for (let i = 0; i < picks.length; i++) {
-        const fileName = `${theme}-${cat}-${i}.jpg`;
+      const items = byCategory[cat];
+      if (items.length === 0) continue;
+
+      // Group by camera angle, sort cameras alphabetically for determinism
+      const byCamera = new Map<string, typeof items>();
+      for (const it of items) {
+        const arr = byCamera.get(it.camera) ?? [];
+        arr.push(it);
+        byCamera.set(it.camera, arr);
+      }
+      const cameras = Array.from(byCamera.keys()).sort();
+
+      // Rotate camera order so different products start with different cameras
+      const rotation = slugHash % cameras.length;
+      const ordered = [...cameras.slice(rotation), ...cameras.slice(0, rotation)];
+
+      // Within each camera, sort colours alphabetically then offset by hash
+      const sortedByCamera = new Map<string, typeof items>();
+      for (const cam of ordered) {
+        sortedByCamera.set(
+          cam,
+          [...byCamera.get(cam)!].sort((a, b) => a.colour.localeCompare(b.colour)),
+        );
+      }
+
+      // Multi-pass interleave: pass 0 picks one shot per camera (each with
+      // a different colour offset), pass 1 picks again with shifted offsets,
+      // and so on until we hit MAX_PER_CATEGORY.
+      const orderedPicks: typeof items = [];
+      const maxColours = Math.max(...ordered.map((c) => sortedByCamera.get(c)!.length));
+      for (let pass = 0; pass < maxColours; pass++) {
+        for (let ci = 0; ci < ordered.length; ci++) {
+          if (orderedPicks.length >= MAX_PER_CATEGORY) break;
+          const cam = ordered[ci];
+          const colourOptions = sortedByCamera.get(cam)!;
+          if (colourOptions.length === 0) continue;
+          const colourIdx = (slugHash + ci * 7 + pass * 11) % colourOptions.length;
+          orderedPicks.push(colourOptions[colourIdx]);
+        }
+        if (orderedPicks.length >= MAX_PER_CATEGORY) break;
+      }
+
+      const seen = new Set<string>();
+      let written = 0;
+      for (const pick of orderedPicks) {
+        if (written >= MAX_PER_CATEGORY) break;
+        if (seen.has(pick.url)) continue;
+        seen.add(pick.url);
+        const fileName = `${theme}-${cat}-${written}.jpg`;
         const outPath = join(productMockupDir, fileName);
         try {
-          await downloadTo(picks[i].url, outPath);
+          await downloadTo(pick.url, outPath);
           out[theme][cat].push(`/mockups/${slug.replace(/-(?:tee|tank|hoodie|mug)$/, '')}/${kind}/${fileName}`);
+          written++;
         } catch (err) {
           console.warn(`    skipped ${fileName}: ${(err as Error).message}`);
         }
@@ -190,11 +250,16 @@ async function main() {
     process.exit(1);
   }
 
-  const filter = process.argv[2];
+  const args = process.argv.slice(2);
+  const kindIdx = args.indexOf('--kind');
+  const kindFilter = kindIdx >= 0 ? args[kindIdx + 1] : undefined;
+  const slugFilter = args.find((a, i) => !a.startsWith('--') && a !== kindFilter);
   const path = join(process.cwd(), 'data', 'products.json');
   const mappings: Mapping[] = JSON.parse(await import('node:fs').then((fs) => fs.promises.readFile(path, 'utf8')));
 
-  const targets = filter ? mappings.filter((m) => m.slug === filter) : mappings;
+  let targets = mappings;
+  if (slugFilter) targets = targets.filter((m) => m.slug === slugFilter);
+  if (kindFilter) targets = targets.filter((m) => m.slug.endsWith(`-${kindFilter}`));
   console.log(`Remirroring ${targets.length} product(s)…\n`);
 
   // Pre-warm variant cache so rate-limit pain happens once, upfront

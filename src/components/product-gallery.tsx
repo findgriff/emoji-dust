@@ -8,7 +8,11 @@ import { CATALOG } from '@/content/catalog';
 type Mode = 'light' | 'dark';
 type Category = 'on_model' | 'flat_front' | 'flat_back' | 'detail';
 
-const CATEGORY_ORDER: Category[] = ['on_model', 'flat_front', 'flat_back', 'detail'];
+const APPAREL_CATEGORY_ORDER: Category[] = ['on_model', 'flat_front', 'flat_back', 'detail'];
+// Mugs lead with flat-front: Printify's `context-N` lifestyle shots are
+// 3/4-angled, which clips the design off the visible face. Flat-front first
+// gives the customer an honest read of the artwork before the lifestyle frame.
+const MUG_CATEGORY_ORDER: Category[] = ['flat_front', 'on_model', 'detail', 'flat_back'];
 const CATEGORY_LABEL: Record<Category, string> = {
   on_model: 'On a model',
   flat_front: 'Front',
@@ -33,9 +37,10 @@ function buildItems(product: Product, mode: Mode): GalleryItem[] {
   const items: GalleryItem[] = [];
   const mockups = product.mockups?.[mode];
 
-  // 1. mockups in priority order (model first, then front, back, detail)
+  // 1. mockups in priority order (apparel: model first; mug: front first)
+  const order = product.kind === 'mug' ? MUG_CATEGORY_ORDER : APPAREL_CATEGORY_ORDER;
   if (mockups) {
-    for (const cat of CATEGORY_ORDER) {
+    for (const cat of order) {
       for (const url of mockups[cat] ?? []) {
         items.push({ kind: 'mockup', url, label: CATEGORY_LABEL[cat], bg: mode });
       }

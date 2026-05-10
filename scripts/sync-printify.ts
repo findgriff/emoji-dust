@@ -133,32 +133,93 @@ async function main() {
       const darkBuckets: CategorizedMockups = { on_model: [], flat_front: [], flat_back: [], detail: [] };
       const seen = new Set<string>();
 
+      // Deterministic hash of slug — same product always picks same combos
+      // (idempotent across re-syncs) but adjacent products diverge.
+      const slugHash = (() => {
+        let h = 2166136261 >>> 0; // FNV-1a basis
+        for (let i = 0; i < p.slug.length; i++) {
+          h ^= p.slug.charCodeAt(i);
+          h = Math.imul(h, 16777619) >>> 0;
+        }
+        return h;
+      })();
+
       async function mirrorByCategory(
         themeMockups: typeof result.mockups.light,
         targetBuckets: CategorizedMockups,
         theme: 'light' | 'dark',
       ) {
-        // Sort: place on_model first so they're prioritised even if disk space tight
+        // Decode camera_label and colour-group from each mockup
         const items = themeMockups.map((m) => {
           const cam = new NodeURL(m.url).searchParams.get('camera_label') ?? m.position ?? 'front';
-          return { ...m, camera: cam, category: categorizeCamera(cam) };
+          // Use first variant_id as the "colour group" key — every variant in a
+          // mockup's variant_ids array is the same colour, different sizes.
+          const colourKey = (m.variant_ids?.[0] ?? 0).toString();
+          return { ...m, camera: cam, colourKey, category: categorizeCamera(cam) };
         });
-        // Group by category
+
         const byCat: Record<MockupCategory, typeof items> = {
           on_model: [], flat_front: [], flat_back: [], detail: [],
         };
         for (const it of items) byCat[it.category].push(it);
-        // Mirror up to MAX_PER_CATEGORY per category
+
         for (const cat of ['on_model','flat_front','flat_back','detail'] as MockupCategory[]) {
+          // Pick varied (camera × colour) combos using slugHash:
+          // 1. Group by camera angle within the category
+          // 2. Sort cameras alphabetically for determinism
+          // 3. Rotate camera order by slugHash so different products start at different angles
+          // 4. For each camera, pick a colour offset by (slugHash + cameraIndex) — different
+          //    products get different colours on the same camera angle, and within one product
+          //    different cameras land on different colours
+          const byCamera = new Map<string, typeof items>();
           for (const it of byCat[cat]) {
+            const arr = byCamera.get(it.camera) ?? [];
+            arr.push(it);
+            byCamera.set(it.camera, arr);
+          }
+          const cameras = Array.from(byCamera.keys()).sort();
+          if (cameras.length === 0) continue;
+
+          const rotation = slugHash % cameras.length;
+          const ordered = [...cameras.slice(rotation), ...cameras.slice(0, rotation)];
+
+          // Generate (camera, colour) picks in interleaved priority:
+          //   1st pass: cam[0]-colour[a], cam[1]-colour[b], cam[2]-colour[c]…
+          //   2nd pass: cam[0]-colour[d], cam[1]-colour[e]… (different colour per camera)
+          // This way: blueprints with many cameras (tees, 17 model angles) get one
+          // colour per camera; blueprints with few cameras (hoodies, 2 model angles)
+          // cycle through all colours of the few cameras.
+          const sortedByCamera = new Map<string, typeof items>();
+          for (const cam of ordered) {
+            sortedByCamera.set(cam, [...byCamera.get(cam)!].sort((a, b) =>
+              a.colourKey.localeCompare(b.colourKey),
+            ));
+          }
+
+          const orderedPicks: typeof items = [];
+          const maxColoursAcrossCameras = Math.max(...ordered.map((c) => sortedByCamera.get(c)!.length));
+          for (let pass = 0; pass < maxColoursAcrossCameras; pass++) {
+            for (let ci = 0; ci < ordered.length; ci++) {
+              if (orderedPicks.length >= MAX_PER_CATEGORY) break;
+              const cam = ordered[ci];
+              const colourOptions = sortedByCamera.get(cam)!;
+              if (colourOptions.length === 0) continue;
+              // Each (camera, pass) gets a different colour offset
+              const colourIdx = (slugHash + ci * 7 + pass * 11) % colourOptions.length;
+              orderedPicks.push(colourOptions[colourIdx]);
+            }
+            if (orderedPicks.length >= MAX_PER_CATEGORY) break;
+          }
+
+          for (const pick of orderedPicks) {
             if (targetBuckets[cat].length >= MAX_PER_CATEGORY) break;
-            if (seen.has(it.url)) continue;
-            seen.add(it.url);
+            if (seen.has(pick.url)) continue;
+            seen.add(pick.url);
             try {
               const fileName = `${theme}-${cat}-${targetBuckets[cat].length}.jpg`;
               const dir = join(process.cwd(), 'public', 'mockups', p.quote_id, p.kind);
               await mkdir(dir, { recursive: true });
-              const res = await fetch(it.url);
+              const res = await fetch(pick.url);
               if (!res.ok) continue;
               await writeFile(join(dir, fileName), Buffer.from(await res.arrayBuffer()));
               targetBuckets[cat].push(`/mockups/${p.quote_id}/${p.kind}/${fileName}`);

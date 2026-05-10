@@ -7,13 +7,20 @@ import { figureBySlug } from '@/content/figures';
 
 /**
  * Pick the hero image for a browse tile.
- * Priority: on-model mockup → flat-front mockup → rendered design preview.
- * Falling back to the design preview keeps cards uniform when sync hasn't run.
+ * Apparel: on-model first (a person wearing it sells the vibe).
+ * Mugs: flat-front first — Printify's mug `context-N` shots are angled so
+ * the design clips off the visible face. The clean centred front-face shot
+ * is the most honest preview; the context shot becomes a secondary angle.
  */
 function heroImage(product: Product): { src: string; isModel: boolean } {
   const m = product.mockups?.light;
-  if (m?.on_model?.[0]) return { src: m.on_model[0], isModel: true };
-  if (m?.flat_front?.[0]) return { src: m.flat_front[0], isModel: false };
+  if (product.kind === 'mug') {
+    if (m?.flat_front?.[0]) return { src: m.flat_front[0], isModel: false };
+    if (m?.on_model?.[0]) return { src: m.on_model[0], isModel: true };
+  } else {
+    if (m?.on_model?.[0]) return { src: m.on_model[0], isModel: true };
+    if (m?.flat_front?.[0]) return { src: m.flat_front[0], isModel: false };
+  }
   return { src: product.artwork_light_preview, isModel: false };
 }
 

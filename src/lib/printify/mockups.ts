@@ -28,6 +28,10 @@ export function categorizeCamera(label: string): MockupCategory {
   // on-body / lifestyle: person-N / model-N for apparel; context-N for mugs (mug-in-context = held mug)
   if (/^(person|model|lifestyle|scene|outdoor|urban|wearing|context|mood|duo)/i.test(l)) return 'on_model';
   if (/^back/i.test(l)) return 'flat_back';
+  // 3/4 angled views — for mugs `left`/`right` show the design wrapping
+  // around the side, not centred on the front face. Treat these as `detail`
+  // so the storefront leads with a clean front-face shot first.
+  if (/^(left|right|side)$/i.test(l)) return 'detail';
   if (/folded|hanging|detail|close|zoom|angled|size-chart/i.test(l)) return 'detail';
   return 'flat_front';
 }
@@ -47,8 +51,13 @@ const HERO_COLOURS: Record<ProductKind, { light: string[]; dark: string[] }> = {
     dark: [],
   },
   hoodie: {
+    // Light is structurally limited to 2 colours by the catalog — the picker
+    // will inevitably reuse combos across 12 products.
     light: ['Arctic White', 'Heather Grey'],
-    dark: ['Jet Black', 'Oxford Navy'],
+    // Dark expands to all 6 colours so the catalogue grid feels less monotone.
+    // Printify returns whichever of these its provider has model shots for;
+    // any not returned simply fall through to the fallback.
+    dark: ['Jet Black', 'Oxford Navy', 'Burgundy', 'Bottle Green', 'Charcoal', 'Hot Chocolate'],
   },
   mug: {
     light: [],  // mug has no colour variants — empty allowlist => accept all
